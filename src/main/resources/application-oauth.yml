@@ -1,0 +1,14 @@
+oauth2:
+  user:
+    kakao:
+      client-id: ${client-id}
+      client-secret: ${secret-key}
+      redirect-uri: ${redirect-url}
+  provider:
+    kakao:
+      token-uri: https://kauth.kakao.com/oauth/token
+      user-info-uri: https://kapi.kakao.com/v2/user/me
+
+jwt:
+  token:
+    secret-key: secret_key

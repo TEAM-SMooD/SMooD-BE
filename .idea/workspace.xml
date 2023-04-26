@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="eec1c728-e8f8-4bca-845b-87323642bf69" name="SMooD-BE-4 feat : 카카오 로그인 구현" comment="SMooD-BE-4 feat : 카카오 로그인 구현">
+      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/config/InMemoryProviderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/config/jwt/JwtTokenProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/config/oauth/OauthAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/config/oauth/OauthAttributes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/config/oauth/OauthConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/config/oauth/OauthProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/config/oauth/OauthProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/config/oauth/OauthTokenResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/controller/OauthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/domain/Member.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/domain/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/dto/LoginResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/dto/UserProfile.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/repository/MemberRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/yeinyeonha/SMooD/service/OauthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-oauth.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/application-prod.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/aws.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/kakao.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6.1/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6.1/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6.1/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6.1/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6.1/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6.1/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6.1/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6.1/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6.1/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/7.6.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/HELP.md" beforeDir="false" afterPath="$PROJECT_DIR$/HELP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/yeinyeongha/SMooD/SMooDApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yeinyeongha/SMooD/Domain/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/yeinyeongha/SMooD/SMooDApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/yeinyeongha/SMooD/SMooDApplicationTests.java" beforeDir="false" />
+    </list>
+    <list id="21bb1697-c351-4119-8045-82c659117a7c" name="Changes" comment="Changes" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2NwV2wLq9MfwWpyhVdHaeYFhnlA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature-4-KakaoLogin&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/jeongjiyeon/Capstone/SMooD-BE&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;329cc9173c6d4205b23618d3cecfc6b8&quot;,
+    &quot;tasks.open.task.update.state.enabled&quot;: &quot;false&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/gradle/wrapper" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="SMooD-BE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="SMooD-BE" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SMooDApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="SMooD.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="yeinyeonha.SMooD.SMooDApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="yeinyeonha.SMooD.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.SMooDApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task id="Default" summary="Default task">
+      <branch name="main" repository="$PROJECT_DIR$" />
+      <changelist id="21bb1697-c351-4119-8045-82c659117a7c" name="Changes" comment="" />
+      <created>1680574930336</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1681261466082</updated>
+      <workItem from="1680574937142" duration="344000" />
+      <workItem from="1680575557147" duration="23000" />
+      <workItem from="1680575633615" duration="76000" />
+      <workItem from="1680575731516" duration="100000" />
+      <workItem from="1680575854451" duration="224000" />
+      <workItem from="1680576122965" duration="14000" />
+      <workItem from="1680576141205" duration="20000" />
+      <workItem from="1680576184057" duration="201000" />
+      <workItem from="1681261438370" duration="28000" />
+    </task>
+    <task id="LOCAL-00004" summary="feat : User Domain 추가&#10;&#10;Resolves : #3">
+      <branch name="main" repository="$PROJECT_DIR$" />
+      <created>1681261332605</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681261504769</updated>
+      <workItem from="1681261466450" duration="39000" />
+    </task>
+    <task active="true" id="SMooD-BE-4" summary="feat : 카카오 로그인 구현">
+      <branch name="main" repository="$PROJECT_DIR$" original="true" />
+      <branch name="feature-4-KakaoLogin" repository="$PROJECT_DIR$" />
+      <changelist id="eec1c728-e8f8-4bca-845b-87323642bf69" name="SMooD-BE-4 feat : 카카오 로그인 구현" comment="SMooD-BE-4 feat : 카카오 로그인 구현" />
+      <created>1681260694000</created>
+      <option name="issue" value="true" />
+      <url>https://github.com/TEAM-SMooD/SMooD-BE/issues/4</url>
+      <option name="number" value="4" />
+      <option name="presentableId" value="SMooD-BE-4" />
+      <option name="project" value="SMooD-BE" />
+      <option name="type" value="BUG" />
+      <updated>1681261504769</updated>
+      <workItem from="1681261505556" duration="45000" />
+      <workItem from="1681261552208" duration="929000" />
+      <workItem from="1681264904295" duration="557000" />
+      <workItem from="1681265471127" duration="8442000" />
+      <workItem from="1681279820757" duration="7522000" />
+      <workItem from="1681348111970" duration="9000" />
+      <workItem from="1681354314261" duration="361000" />
+      <workItem from="1681359213836" duration="38000" />
+      <workItem from="1681367621922" duration="5000" />
+      <workItem from="1681367644637" duration="4884000" />
+      <workItem from="1681446358482" duration="82000" />
+      <workItem from="1681446442641" duration="11910000" />
+      <workItem from="1681534238537" duration="2680000" />
+      <workItem from="1681537019796" duration="27000" />
+      <workItem from="1681537151612" duration="3000" />
+      <workItem from="1681537192206" duration="12000" />
+      <workItem from="1681537360901" duration="8000" />
+      <workItem from="1681537714691" duration="1564000" />
+      <workItem from="1681539696488" duration="108000" />
+      <workItem from="1681566431145" duration="921000" />
+      <workItem from="1681641314725" duration="601000" />
+      <workItem from="1681715880563" duration="18996000" />
+      <workItem from="1681862582457" duration="1606000" />
+      <workItem from="1681864356549" duration="2918000" />
+      <workItem from="1681867285796" duration="11652000" />
+      <workItem from="1681880171266" duration="8219000" />
+      <workItem from="1681888531119" duration="434000" />
+      <workItem from="1681889163711" duration="692000" />
+      <workItem from="1681889865579" duration="841000" />
+      <workItem from="1681890768065" duration="143000" />
+      <workItem from="1681890940265" duration="864000" />
+      <workItem from="1682476389116" duration="1078000" />
+      <workItem from="1682486792044" duration="69000" />
+      <workItem from="1682486983626" duration="30000" />
+      <workItem from="1682487033296" duration="2982000" />
+      <workItem from="1682490963917" duration="58000" />
+      <workItem from="1682491109299" duration="32000" />
+      <workItem from="1682491245390" duration="1286000" />
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <option name="clearContext" value="false" />
+    <servers>
+      <GitHub url="https://github.com">
+        <option name="repoAuthor" value="Team-SMooD" />
+        <option name="repoName" value="SMooD-BE" />
+      </GitHub>
+    </servers>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat : 프로젝트 초기 설정&#10;&#10;Resolves : #1" />
+    <MESSAGE value="feat : User Domain 추가&#10;&#10;Resolves : #3" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat : User Domain 추가&#10;&#10;Resolves : #3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/yeinyeongha/SMooD/handler/LoginFailureHandler.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/yeinyeongha/SMooD/oauth2/OAuthAttributes.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="2" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/yeinyeongha/SMooD/oauth2/OAuth2UserInfo.java</url>
+          <line>8</line>
+          <properties class="yeinyeongha.SMooD.oauth2.OAuth2UserInfo" method="&lt;init&gt;">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -43,15 +43,6 @@ jobs:
           echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
       shell: bash
 
-    ## create firebase-key.json
-    - name: create firebase key
-      run: |
-        cd ./src/main/resources
-        ls -a .
-        touch ./firebase-service-key.json
-        echo "${{ secrets.FIREBASE_KEY }}" > ./firebase-service-key.json
-      shell: bash
-
     ## gradle build
     - name: Build with Gradle
       run: ./gradlew build -x test -x ktlintCheck -x ktlintTestSourceSetCheck -x ktlintMainSourceSetCheck -x ktlintKotlinScriptCheck
@@ -120,18 +111,3 @@ jobs:
       - name: Print Current Time
         run: echo "Current Time=${{steps.current-time.outputs.formattedTime}}" # current-time 에서 지정한 포맷대로 현재 시간 출력
         shell: bash
-
-  ## slack
-  action-slack:
-    needs: CI-CD
-    runs-on: ubuntu-latest
-    steps:
-        - name: Slack Alarm
-          uses: 8398a7/action-slack@v3
-          with:
-              status: ${{ job.status }}
-              author_name: GitHub-Actions CI/CD
-              fields: repo,message,commit,author,ref,job,took
-          env:
-              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-          if: always() # Pick up events even if the job fails or is canceled.

@@ -34,13 +34,19 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-gradle-
 
-    ## create application-prod.properties
-    - name: make application-prod.properties
+    ## create properties
+    - name: make aws.properties
       if: contains(github.ref, 'main')
       run: |
           cd ./src/main/resources
           touch ./aws.properties
           echo "${{ secrets.PROPERTIES_AWS }}" > ./aws.properties
+      shell: bash
+      
+    - name: make kakao.properties
+      if: contains(github.ref, 'main')
+      run: |
+          cd ./src/main/resources
           touch ./kakao.properties
           echo "${{ secrets.PROPERTIES_KAKAO }}" > ./kakao.properties
       shell: bash

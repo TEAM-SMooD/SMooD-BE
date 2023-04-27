@@ -39,8 +39,10 @@ jobs:
       if: contains(github.ref, 'main')
       run: |
           cd ./src/main/resources
-          touch ./application-prod.properties
-          echo "${{ secrets.PROPERTIES_PROD }}" > ./application-prod.properties
+          touch ./aws.properties
+          echo "${{ secrets.PROPERTIES_AWS }}" > ./aws.properties
+          touch ./kakao.properties
+          echo "${{ secrets.PROPERTIES_KAKAO }}" > ./kakao.properties
       shell: bash
 
     ## gradle build

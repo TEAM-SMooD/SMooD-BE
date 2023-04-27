@@ -1,3 +1,5 @@
 *.yml
 aws.properties
 kakao.properties
+.idea
+out

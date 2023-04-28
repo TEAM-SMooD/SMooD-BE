@@ -1,97 +1,33 @@
-# github repository Actions 페이지에 나타낼 이름
-name: CI/CD
+# workflow의 이름
+name: CI
 
-# event trigger
+# 해당 workflow가 언제 실행될 것인지에 대한 트리거를 지정
 on:
   push:
-    branches:
-      - main
+    branches: [ main ] # main branch로 push 될 때 실행됩니다.
+  pull_request:
+    branches: [ main ]  # main branch로 pull request될 때 실행됩니다.
 
-permissions:
-  contents: read
-
+# workflow는 한개 이상의 job을 가지며, 각 job은 여러 step에 따라 단계를 나눌 수 있습니다.
 jobs:
-  CI-CD:
+  build:
+    name: CI
+    # 해당 jobs에서 아래의 steps들이 어떠한 환경에서 실행될 것인지를 지정합니다.
     runs-on: ubuntu-latest
+
     steps:
-
-    ## jdk setting
-    - uses: actions/checkout@v3
-    - name: Set up JDK 11
-      uses: actions/setup-java@v3
-      with:
-        java-version: '11'
-        distribution: 'temurin' # https://github.com/actions/setup-java
-
-    ## gradle caching
-    - name: Gradle Caching
-      uses: actions/cache@v3
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-        restore-keys: |
-          ${{ runner.os }}-gradle-
-
-    ## create properties
-    - name: make aws.properties
-      if: contains(github.ref, 'main')
-      run: |
-          cd ./src/main/resources
-          touch ./aws.properties
-          echo "${{ secrets.PROPERTIES_AWS }}" > ./aws.properties
-      shell: bash
-      
-    - name: make kakao.properties
-      if: contains(github.ref, 'main')
-      run: |
-          cd ./src/main/resources
-          touch ./kakao.properties
-          echo "${{ secrets.PROPERTIES_KAKAO }}" > ./kakao.properties
-      shell: bash
-
-    ## gradle build
-    - name: Build with Gradle
-      run: ./gradlew build -x test
-
-    ## docker build & push to production
-    - name: Docker build & push to prod
-      if: contains(github.ref, 'main')
-      run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-          docker build -f Dockerfile-prod -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }} .
-          docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-
-    ## deploy to production
-    - name: Deploy to prod
-      uses: appleboy/ssh-action@master
-      id: deploy-prod
-      if: contains(github.ref, 'main')
-      with:
-          host: ${{ secrets.HOST_PROD }}
-          username: ubuntu
-          key: ${{ secrets.PRIVATE_KEY }}
-          envs: GITHUB_SHA
-          script: |
-              sudo docker rm -f $(docker ps -qa)
-              sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
-              docker-compose up -d
-              docker image prune -f
-          port: 22
-
-  ## time
-  current-time:
-    needs: CI-CD
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Current Time
-        uses: 1466587594/get-current-time@v2
-        id: current-time
+     # 작업에서 액세스할 수 있도록 $GITHUB_WORKSPACE에서 저장소를 체크아웃합니다.
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
         with:
-          format: YYYY-MM-DDTHH:mm:ss
-          utcOffset: "+09:00" # 기준이 UTC이기 때문에 한국시간인 KST를 맞추기 위해 +9시간 추가
+          java-version: '11'
+          distribution: 'zulu'
 
-      - name: Print Current Time
-        run: echo "Current Time=${{steps.current-time.outputs.formattedTime}}" # current-time 에서 지정한 포맷대로 현재 시간 출력
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+        shell: bash
+      
+      - name: Build with Gradle
+        run: ./gradlew build
         shell: bash

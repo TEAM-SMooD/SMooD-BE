@@ -70,7 +70,7 @@ jobs:
       if: contains(github.ref, 'main')
       with:
           host: ${{ secrets.HOST_PROD }}
-          username: ec2-user
+          username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           envs: GITHUB_SHA
           script: |
@@ -78,6 +78,7 @@ jobs:
               sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
               docker-compose up -d
               docker image prune -f
+          port: 22
 
   ## time
   current-time:

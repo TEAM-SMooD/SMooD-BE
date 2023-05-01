@@ -1,9 +1,11 @@
 package yeinyeonha.SMooD.config.oauth;
 
+import lombok.extern.slf4j.Slf4j;
 import yeinyeonha.SMooD.dto.UserProfile;
 
 import java.util.Arrays;
 import java.util.Map;
+@Slf4j
 
 public enum OauthAttributes {
 //    GITHUB("github") {
@@ -24,8 +26,8 @@ public enum OauthAttributes {
             return UserProfile.builder()
                     .oauthId(String.valueOf(attributes.get("id")))
                     .email((String) response.get("email"))
-                    .name((String) response.get("nickname"))
-                    .imageUrl((String) response.get("profile_image"))
+                    .name(null)
+                    .imageUrl(null)
                     .build();
         }
     };

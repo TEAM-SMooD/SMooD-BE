@@ -46,9 +46,9 @@ public class OauthService {
 
         return LoginResponseDto.builder()
                 .id(member.getId())
-                .name(member.getName())
+                .name(null)
                 .email(member.getEmail())
-                .imageUrl(member.getImageUrl())
+                .imageUrl(null)
                 .role(member.getRole())
                 .tokenType("Bearer")
                 .accessToken(accessToken)

@@ -20,15 +20,14 @@ public class Member {
     private String imageUrl;
     @Enumerated(EnumType.STRING)
     private Role role;
+
     @Builder
     public Member(String oauthId, String name, String email, String imageUrl, Role role) {
-        Member.builder()
-                .oauthId(oauthId)
-                .name(name)
-                .email(email)
-                .imageUrl(imageUrl)
-                .role(role)
-                .build();
+        this.oauthId = oauthId;
+        this.name = name;
+        this.email = email;
+        this.imageUrl = imageUrl;
+        this.role = role;
     }
     public Member update(String name, String email, String imageUrl) {
         this.name = name;

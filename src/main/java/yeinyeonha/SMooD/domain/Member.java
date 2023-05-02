@@ -1,12 +1,15 @@
 package yeinyeonha.SMooD.domain;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Getter
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,16 +20,15 @@ public class Member {
     private String imageUrl;
     @Enumerated(EnumType.STRING)
     private Role role;
-    protected Member() {
-    }
     @Builder
-    public Member(Long id, String oauthId, String name, String email, String imageUrl, Role role) {
-        this.id = id;
-        this.oauthId = oauthId;
-        this.name = name;
-        this.email = email;
-        this.imageUrl = imageUrl;
-        this.role = role;
+    public Member(String oauthId, String name, String email, String imageUrl, Role role) {
+        Member.builder()
+                .oauthId(oauthId)
+                .name(name)
+                .email(email)
+                .imageUrl(imageUrl)
+                .role(role)
+                .build();
     }
     public Member update(String name, String email, String imageUrl) {
         this.name = name;

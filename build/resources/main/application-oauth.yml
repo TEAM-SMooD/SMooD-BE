@@ -1,14 +1,57 @@
-oauth2:
-  user:
-    kakao:
-      client-id: ${client-id}
-      client-secret: ${secret-key}
-      redirect-uri: ${redirect-url}
-  provider:
-    kakao:
-      token-uri: https://kauth.kakao.com/oauth/token
-      user-info-uri: https://kapi.kakao.com/v2/user/me
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            clientId: ${client-id-google}
+            clientSecret: ${secret-key-google}
+            scope:
+              - email
+              - profile
+          naver:
+            clientId: ${client-id-naver}
+            clientSecret: ${secret-key-naver}
+            clientAuthenticationMethod: post
+            authorizationGrantType: authorization_code
+            redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            scope:
+              - nickname
+              - email
+            clientName: Naver
+          kakao:
+            clientId: ${client-id}
+            clientSecret: ${secret-key s}
+            clientAuthenticationMethod: post
+            authorizationGrantType: authorization_code
+            redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            scope:
+              - profile_nickname
+              - account_email
+            clientName: Kakao
+        provider:
+          naver:
+            authorizationUri: https://nid.naver.com/oauth2.0/authorize
+            tokenUri: https://nid.naver.com/oauth2.0/token
+            userInfoUri: https://openapi.naver.com/v1/nid/me
+            userNameAttribute: response
+          kakao:
+            authorizationUri: https://kauth.kakao.com/oauth/authorize
+            tokenUri: https://kauth.kakao.com/oauth/token
+            userInfoUri: https://kapi.kakao.com/v2/user/me
+            userNameAttribute: id
 
-jwt:
-  token:
-    secret-key: secret_key
+jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+app:
+  auth:
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenExpiry: 1800000
+    refreshTokenExpiry: 604800000
+  oauth2:
+    authorizedRedirectUris:
+      - ${redirect-url}
+cors:
+  allowed-origins: 'http://localhost:3000'
+  allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+  allowed-headers: '*'
+  max-age: 3600

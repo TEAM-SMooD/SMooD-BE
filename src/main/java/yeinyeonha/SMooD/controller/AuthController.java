@@ -7,10 +7,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 import yeinyeonha.SMooD.config.AppProperties;
 import yeinyeonha.SMooD.domain.RoleType;
-import yeinyeonha.SMooD.dto.ApiResponse;
 import yeinyeonha.SMooD.domain.UserRefreshToken;
+import yeinyeonha.SMooD.dto.ResponseDto;
 import yeinyeonha.SMooD.oauth.AuthReqModel;
 import yeinyeonha.SMooD.oauth.UserPrincipal;
 import yeinyeonha.SMooD.oauth.token.AuthToken;
@@ -26,6 +27,7 @@ import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
+@ApiIgnore
 public class AuthController {
     private final AppProperties appProperties;
     private final AuthTokenProvider tokenProvider;
@@ -35,7 +37,7 @@ public class AuthController {
     private final static String REFRESH_TOKEN = "refresh_token";
 
     @PostMapping("/api/auth/login")
-    public ApiResponse login(
+    public ResponseDto login(
             HttpServletRequest request,
             HttpServletResponse response,
             @RequestBody AuthReqModel authReqModel
@@ -78,22 +80,22 @@ public class AuthController {
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
         CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
 
-        return ApiResponse.success("token", accessToken.getToken());
+        return ResponseDto.success("token", accessToken.getToken());
     }
 
     @GetMapping("/api/auth/refresh")
-    public ApiResponse refreshToken (HttpServletRequest request, HttpServletResponse response) {
+    public ResponseDto refreshToken (HttpServletRequest request, HttpServletResponse response) {
         // access token 확인
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
         if (!authToken.validate()) {
-            return ApiResponse.invalidAccessToken();
+            return ResponseDto.invalidAccessToken();
         }
 
         // expired access token 인지 확인
         Claims claims = authToken.getExpiredTokenClaims();
         if (claims == null) {
-            return ApiResponse.notExpiredTokenYet();
+            return ResponseDto.notExpiredTokenYet();
         }
 
         String userId = claims.getSubject();
@@ -106,13 +108,13 @@ public class AuthController {
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
 
         if (authRefreshToken.validate()) {
-            return ApiResponse.invalidRefreshToken();
+            return ResponseDto.invalidRefreshToken();
         }
 
         // userId refresh token 으로 DB 확인
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserIdAndRefreshToken(userId, refreshToken);
         if (userRefreshToken == null) {
-            return ApiResponse.invalidRefreshToken();
+            return ResponseDto.invalidRefreshToken();
         }
 
         Date now = new Date();
@@ -142,7 +144,7 @@ public class AuthController {
             CookieUtil.addCookie(response, REFRESH_TOKEN, authRefreshToken.getToken(), cookieMaxAge);
         }
 
-        return ApiResponse.success("token", newAccessToken.getToken());
+        return ResponseDto.success("token", newAccessToken.getToken());
     }
 }
 

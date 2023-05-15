@@ -1,8 +1,9 @@
 package yeinyeonha.SMooD.config;
 
+import com.fasterxml.classmate.TypeResolver;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.reactive.config.ResourceHandlerRegistry;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -14,19 +15,26 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import yeinyeonha.SMooD.domain.User;
+import yeinyeonha.SMooD.dto.ResponseDto;
+import yeinyeonha.SMooD.websocket.ChatRoomResponseDto;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Configuration
 @EnableSwagger2
+@RequiredArgsConstructor
 public class SwaggerConfig {
+    private final TypeResolver typeResolver;
+
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
+                .additionalModels(typeResolver.resolve(ResponseDto.class), typeResolver.resolve(ChatRoomResponseDto.class), typeResolver.resolve(User.class))
                 .securityContexts(Arrays.asList(securityContext())) // 추가
                 .securitySchemes(Arrays.asList(apiKey())) // 추가
-                .useDefaultResponseMessages(true) // Swagger 에서 제공해주는 기본 응답 코드를 표시할 것이면 true
+                .useDefaultResponseMessages(false) // Swagger 에서 제공해주는 기본 응답 코드를 표시할 것이면 true
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("yeinyeonha.SMooD.controller")) // Controller가 들어있는 패키지. 이 경로의 하위에 있는 api만 표시됨.

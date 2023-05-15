@@ -1,5 +1,6 @@
 package yeinyeonha.SMooD.websocket;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,12 +21,11 @@ public class ChatRoom {
     private String category;
     private Long userId;
 
-    public static ChatRoom create(ChatRoomDto chatRoomDto) {
-        ChatRoom room = new ChatRoom();
-        room.roomId = UUID.randomUUID().toString();
-        room.roomName = chatRoomDto.getRoomName();
-        room.category = chatRoomDto.getCategory();
-        room.userId = chatRoomDto.getUserId();
-        return room;
+    @Builder
+    public ChatRoom(String roomName, String category, Long userId) {
+        this.roomId = UUID.randomUUID().toString();
+        this.roomName = roomName;
+        this.category = category;
+        this.userId = userId;
     }
 }

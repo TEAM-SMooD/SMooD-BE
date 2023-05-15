@@ -16,7 +16,9 @@ import yeinyeonha.SMooD.websocket.FilterChannelInterceptor;
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
+        //해당 주소를 구독하고 있는 클라이언트들에게 메시지 전달
         registry.enableSimpleBroker("/sub");
+        //클라이언트에서 보낸 메세지를 받을 perfix
         registry.setApplicationDestinationPrefixes("/pub");
     }
 

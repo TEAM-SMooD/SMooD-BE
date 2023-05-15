@@ -2,6 +2,7 @@ package yeinyeonha.SMooD.controller;
 
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -28,6 +29,7 @@ import java.util.Date;
 @RestController
 @RequiredArgsConstructor
 @ApiIgnore
+@Slf4j
 public class AuthController {
     private final AppProperties appProperties;
     private final AuthTokenProvider tokenProvider;
@@ -58,7 +60,6 @@ public class AuthController {
                 ((UserPrincipal) authentication.getPrincipal()).getRoleType().getCode(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
-
         long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
         AuthToken refreshToken = tokenProvider.createAuthToken(
                 appProperties.getAuth().getTokenSecret(),
@@ -80,7 +81,7 @@ public class AuthController {
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
         CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
 
-        return ResponseDto.success("token", accessToken.getToken());
+        return ResponseDto.success("result", accessToken.getToken());
     }
 
     @GetMapping("/api/auth/refresh")
@@ -88,16 +89,16 @@ public class AuthController {
         // access token 확인
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
-        if (!authToken.validate()) {
-            return ResponseDto.invalidAccessToken();
-        }
+//        if (!authToken.validate()) {
+//            return ResponseDto.invalidAccessToken();
+//        }
 
         // expired access token 인지 확인
         Claims claims = authToken.getExpiredTokenClaims();
         if (claims == null) {
             return ResponseDto.notExpiredTokenYet();
         }
-
+        log.info(String.valueOf(claims));
         String userId = claims.getSubject();
         RoleType roleType = RoleType.of(claims.get("role", String.class));
 
@@ -144,7 +145,7 @@ public class AuthController {
             CookieUtil.addCookie(response, REFRESH_TOKEN, authRefreshToken.getToken(), cookieMaxAge);
         }
 
-        return ResponseDto.success("token", newAccessToken.getToken());
+        return ResponseDto.success("result", newAccessToken.getToken());
     }
 }
 

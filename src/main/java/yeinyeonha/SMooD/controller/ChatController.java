@@ -33,7 +33,7 @@ public class ChatController {
     }
     @Operation(summary = "특정 채팅방 메시지들 조회", description = "채팅방의 메시지를 불러옵니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "메시지 불러오기 성공", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "200", description = "메시지 불러오기 성공", content = @Content(schema = @Schema(implementation = MessageDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
@@ -44,7 +44,7 @@ public class ChatController {
                                                   @RequestParam(value = "id", defaultValue = Long.MAX_VALUE + "") Long id,
                                                   @RequestParam(value = "size", defaultValue = "20") Integer size) {
         List<MessageDto> messages = messageService.getChatMessages(roomId, id, size);
-        return ResponseDto.success("messages", messages);
+        return ResponseDto.success("result", messages);
     }
 }
 

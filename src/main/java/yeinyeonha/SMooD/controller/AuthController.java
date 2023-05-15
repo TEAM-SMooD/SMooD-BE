@@ -80,7 +80,6 @@ public class AuthController {
         int cookieMaxAge = (int) refreshTokenExpiry / 60;
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
         CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
-
         return ResponseDto.success("result", accessToken.getToken());
     }
 
@@ -89,16 +88,14 @@ public class AuthController {
         // access token 확인
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
-//        if (!authToken.validate()) {
-//            return ResponseDto.invalidAccessToken();
-//        }
-
+        if (!authToken.validate()) {
+            return ResponseDto.invalidAccessToken();
+        }
         // expired access token 인지 확인
         Claims claims = authToken.getExpiredTokenClaims();
         if (claims == null) {
             return ResponseDto.notExpiredTokenYet();
         }
-        log.info(String.valueOf(claims));
         String userId = claims.getSubject();
         RoleType roleType = RoleType.of(claims.get("role", String.class));
 

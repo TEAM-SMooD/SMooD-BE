@@ -4,17 +4,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import yeinyeonha.SMooD.domain.BaseTimeEntity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Entity
 @NoArgsConstructor
 public class ChatMessage extends BaseTimeEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String roomId;
     private String senderLoginId;

@@ -13,7 +13,7 @@ public class ChattingRepositoryImpl implements ChattingRepositoryCustom {
     public List<ChatMessage> getChattingMessages(String roomId, Long id, Integer size) {
         return jpaQueryFactory.selectFrom(chatMessage)
                 .where(chatMessage.roomId.eq(roomId).and(chatMessage.id.lt(id)))
-                .orderBy(chatMessage.id.desc())
+                .orderBy(chatMessage.id.asc())
                 .limit(size)
                 .fetch();
     }

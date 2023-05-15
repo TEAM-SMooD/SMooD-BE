@@ -1,5 +1,5 @@
 #!/bin/bash
-rm deploy.log
+rm /home/ubuntu/deploy.log
 BUILD_JAR=$(ls /home/ubuntu/build/libs/SMooD-0.0.1-SNAPSHOT.jar)
 JAR_NAME=$(basename $BUILD_JAR)
 $PROJECT_NAME=SMooD
@@ -10,7 +10,7 @@ DEPLOY_PATH=/home/ubuntu/
 cp $BUILD_JAR $DEPLOY_PATH
 
 echo "> 현재 실행중인 애플리케이션 pid 확인" >> /home/ubuntu/deploy.log
-CURRENT_PID=$(pgrep -fl $PROJECT_NAME | grep java | awk '{print $1}')
+CURRENT_PID=$(pgrep -fl SMooD | grep java | awk '{print $1}')
 
 echo "> pid: $CURRENT_PID"
 if [ -z $CURRENT_PID ]; then

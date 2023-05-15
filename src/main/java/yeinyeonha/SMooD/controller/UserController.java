@@ -28,7 +28,21 @@ public class UserController {
     public ResponseDto getUser() {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUser(principal.getUsername());
-        return ResponseDto.success("user", user);
+        return ResponseDto.success("result", user);
+    }
+
+    @Operation(summary = "유저 닉네임 변경", description = "유저 닉네임을 변경합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "닉네임 변경 성공", content = @Content(schema = @Schema(implementation = User.class))),
+            @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
+    })
+    @PutMapping("/api/user")
+    public ResponseDto updateNickname(@RequestBody String nickname) {
+        org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userService.updateNickname(principal.getUsername(), nickname);
+        return ResponseDto.success("result", user);
     }
 }
 

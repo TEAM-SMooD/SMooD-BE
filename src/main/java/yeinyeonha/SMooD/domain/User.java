@@ -34,6 +34,11 @@ public class User {
     @Size(max = 100)
     private String username;
 
+    @Column(name = "NICKNAME", length = 100)
+    @NotNull
+    @Size(max = 100)
+    private String nickname;
+
     @JsonIgnore
     @Column(name = "PASSWORD", length = 128)
     @NotNull
@@ -76,6 +81,7 @@ public class User {
     public User(
             @NotNull @Size(max = 64) String userId,
             @NotNull @Size(max = 100) String username,
+            @NotNull @Size(max = 100) String nickname,
             @NotNull @Size(max = 512) String email,
             @NotNull @Size(max = 1) String emailVerifiedYn,
             @NotNull @Size(max = 512) String profileImageUrl,
@@ -86,6 +92,7 @@ public class User {
     ) {
         this.userId = userId;
         this.username = username;
+        this.nickname = username;
         this.password = "NO_PASS";
         this.email = email != null ? email : "NO_EMAIL";
         this.emailVerifiedYn = emailVerifiedYn;

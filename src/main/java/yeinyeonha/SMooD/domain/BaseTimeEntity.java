@@ -10,7 +10,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @MappedSuperclass
@@ -20,8 +22,23 @@ import java.time.LocalDateTime;
 public abstract class BaseTimeEntity {
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdTime;
+    private String createdDay;
+
+    @CreatedDate
+    @Column(updatable = false)
+    private String createTime;
 
     @LastModifiedDate
-    private LocalDateTime modifiedTime;
+    private String modifiedDay;
+
+    @LastModifiedDate
+    private String modifiedTime;
+
+    @PrePersist
+    public void onPrePersist() {
+        this.createdDay = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+        this.createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+        this.modifiedDay = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
+        this.modifiedTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+    }
 }

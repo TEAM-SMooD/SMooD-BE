@@ -13,4 +13,10 @@ public class UserService {
     public User getUser(String userId) {
         return userRepository.findByUserId(userId);
     }
+
+    public User updateNickname(String userId, String nickname) {
+        User user = userRepository.findByUserId(userId);
+        user.setNickname(nickname);
+        return user;
+    }
 }

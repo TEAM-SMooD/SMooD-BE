@@ -17,7 +17,8 @@ public class MessageDto {
     private String nickname;
     private String message;
     private String roomId;
-    private LocalDateTime dateTime;
+    private String day;
+    private String dateTime;
 
     public MessageDto(ChatMessage chatMessage) {
         this.id = chatMessage.getId();
@@ -25,6 +26,7 @@ public class MessageDto {
         this.nickname = chatMessage.getNickname();
         this.roomId = chatMessage.getRoomId();
         this.message = chatMessage.getMessage();
-        this.dateTime = chatMessage.getCreatedTime();
+        this.day = chatMessage.getCreatedDay();
+        this.dateTime = chatMessage.getCreateTime();
     }
 }

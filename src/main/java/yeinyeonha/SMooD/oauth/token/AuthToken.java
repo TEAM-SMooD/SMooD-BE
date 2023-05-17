@@ -29,20 +29,25 @@ public class AuthToken {
     }
 
     private String createAuthToken(String id, Date expiry) {
-        return Jwts.builder()
+        String str = Jwts.builder()
                 .setSubject(id)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .setExpiration(expiry)
                 .compact();
+        log.info(str);
+        return str;
     }
 
     private String createAuthToken(String id, String role, Date expiry) {
-        return Jwts.builder()
+        String str = Jwts.builder()
                 .setSubject(id)
                 .claim(AUTHORITIES_KEY, role)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .setExpiration(expiry)
                 .compact();
+        log.info(str);
+        return str;
+
     }
 
     public boolean validate() {

@@ -42,7 +42,6 @@ public class AuthTokenProvider {
         log.info("야야야얍");
         if(authToken.validate()) {
             Claims claims = authToken.getTokenClaims();
-            log.info("lglglglglglg");
             Collection<? extends GrantedAuthority> authorities =
                     Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
                             .map(SimpleGrantedAuthority::new)

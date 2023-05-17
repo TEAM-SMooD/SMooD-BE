@@ -50,7 +50,7 @@ public class AuthController {
                         authReqModel.getPassword()
                 )
         );
-
+        log.info(authentication.getName());
         String userId = authReqModel.getId();
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -60,6 +60,7 @@ public class AuthController {
                 ((UserPrincipal) authentication.getPrincipal()).getRoleType().getCode(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
+        log.info(String.valueOf(accessToken));
         long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
         AuthToken refreshToken = tokenProvider.createAuthToken(
                 appProperties.getAuth().getTokenSecret(),

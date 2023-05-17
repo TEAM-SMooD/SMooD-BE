@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(tokenAccessDeniedHandler)
                 .and()
                 .requiresChannel()
-                .antMatchers("/")
+                .antMatchers("*")
                 .requiresSecure()
                 .and()
                 .authorizeRequests()
@@ -98,16 +98,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
 
-        web.httpFirewall(defaultHttpFirewall())
-                .ignoring()
+        web.ignoring()
                 .antMatchers("/h2-console/**")
                 .antMatchers("/ws");
 
-    }
-
-    @Bean
-    public HttpFirewall defaultHttpFirewall() {
-        return new DefaultHttpFirewall();
     }
 
     /*

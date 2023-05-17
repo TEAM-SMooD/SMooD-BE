@@ -39,9 +39,8 @@ public class AuthTokenProvider {
     }
 
     public Authentication getAuthentication(AuthToken authToken) {
-
+        log.info("야야야얍");
         if(authToken.validate()) {
-            log.info("야야야얍");
             Claims claims = authToken.getTokenClaims();
             log.info("lglglglglglg");
             Collection<? extends GrantedAuthority> authorities =

@@ -34,7 +34,6 @@ public class AuthToken {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .setExpiration(expiry)
                 .compact();
-        log.info(str);
         return str;
     }
 

@@ -18,7 +18,7 @@ if [ -z $CURRENT_PID ]; then
 else
   echo "> kill -15 $CURRENT_PID" >> /home/ubuntu/deploy.log
   kill -15 $CURRENT_PID
-  sleep 10
+  sleep 20
 fi
 
 DEPLOY_JAR=$DEPLOY_PATH$JAR_NAME

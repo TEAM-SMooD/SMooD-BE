@@ -16,8 +16,6 @@ public class CookieUtil {
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
                 if (name.equals(cookie.getName())) {
-                    log.info(cookie.getValue());
-                    log.info(cookie.getName());
                     return Optional.of(cookie);
                 }
             }

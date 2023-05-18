@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import yeinyeonha.SMooD.oauth.token.AuthTokenProvider;
 
+import java.util.Base64;
+
 @Configuration
 public class JwtConfig {
     @Value("${jwt.secret}")
@@ -12,7 +14,7 @@ public class JwtConfig {
 
     @Bean
     public AuthTokenProvider jwtProvider() {
-        return new AuthTokenProvider(secret);
+        return new AuthTokenProvider(Base64.getEncoder().encodeToString(secret.getBytes()));
     }
 }
 

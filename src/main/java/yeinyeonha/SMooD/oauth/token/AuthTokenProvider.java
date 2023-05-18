@@ -45,7 +45,6 @@ public class AuthTokenProvider {
                     Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})
                             .map(SimpleGrantedAuthority::new)
                             .collect(Collectors.toList());
-
             log.debug("claims subject := [{}]", claims.getSubject());
             User principal = new User(claims.getSubject(), "", authorities);
             return new UsernamePasswordAuthenticationToken(principal, authToken, authorities);

@@ -30,6 +30,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @ApiIgnore
 @Slf4j
+@RequestMapping("/api")
 public class AuthController {
     private final AppProperties appProperties;
     private final AuthTokenProvider tokenProvider;
@@ -38,7 +39,7 @@ public class AuthController {
     private final static long THREE_DAYS_MSEC = 259200000;
     private final static String REFRESH_TOKEN = "refresh_token";
 
-    @PostMapping("/api/auth/login")
+    @PostMapping("/auth/login")
     public ResponseDto login(
             HttpServletRequest request,
             HttpServletResponse response,
@@ -82,7 +83,7 @@ public class AuthController {
         return ResponseDto.success("result", accessToken.getToken());
     }
 
-    @GetMapping("/api/auth/refresh")
+    @GetMapping("/auth/refresh")
     public ResponseDto refreshToken (HttpServletRequest request, HttpServletResponse response) {
         // access token 확인
         String accessToken = HeaderUtil.getAccessToken(request);

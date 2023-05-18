@@ -11,6 +11,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import yeinyeonha.SMooD.dto.ResponseDto;
@@ -21,6 +22,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Controller
 @Api(tags = {"Chatting 관련 API"})
+@RequestMapping("/api")
 public class ChatController {
     private final SimpMessageSendingOperations simpMessageSendingOperations;
     private final MessageService messageService;
@@ -38,7 +40,7 @@ public class ChatController {
             @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
     })
-    @GetMapping("/api/chatting")
+    @GetMapping("/chatting")
     @ResponseBody
     public ResponseDto<List<MessageDto>> chatLoad(@RequestParam("roomId") String roomId,
                                                   @RequestParam(value = "id", defaultValue = Long.MAX_VALUE + "") Long id,

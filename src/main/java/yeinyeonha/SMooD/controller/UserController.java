@@ -15,6 +15,7 @@ import yeinyeonha.SMooD.service.UserService;
 @RestController
 @RequiredArgsConstructor
 @Api(tags = {"회원 관련 API"})
+@RequestMapping("/api")
 public class UserController {
     private final UserService userService;
     @Operation(summary = "유저 정보 가져오기", description = "유저 정보를 가져옵니다.")
@@ -24,7 +25,7 @@ public class UserController {
             @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
     })
-    @GetMapping("/api/users")
+    @GetMapping("/users")
     public ResponseDto getUser() {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.getUser(principal.getUsername());
@@ -38,7 +39,7 @@ public class UserController {
             @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
     })
-    @PutMapping("/api/user")
+    @PutMapping("/user")
     public ResponseDto updateNickname(@RequestBody String nickname) {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userService.updateNickname(principal.getUsername(), nickname);

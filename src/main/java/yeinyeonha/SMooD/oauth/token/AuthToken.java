@@ -27,42 +27,34 @@ public class AuthToken {
         this.key = key;
         this.token = createAuthToken(id, role, expiry);
     }
-
+    //리프레시 토큰용
     private String createAuthToken(String id, Date expiry) {
         String str = Jwts.builder()
+                .setHeaderParam("typ", "JWT")
                 .setSubject(id)
-                .signWith(key, SignatureAlgorithm.HS256)
                 .setExpiration(expiry)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
         return str;
     }
-
+    //그냥 토큰용
     private String createAuthToken(String id, String role, Date expiry) {
         String str = Jwts.builder()
+                .setHeaderParam("typ", "JWT")
                 .setSubject(id)
                 .claim(AUTHORITIES_KEY, role)
-                .signWith(key, SignatureAlgorithm.HS256)
                 .setExpiration(expiry)
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
-        log.info(AUTHORITIES_KEY);
-        log.info(String.valueOf(key), SignatureAlgorithm.HS256);
-        log.info(String.valueOf(expiry));
-        log.info(str);
         return str;
 
     }
 
     public boolean validate() {
-        log.info(this.getTokenClaims().toString());
         return this.getTokenClaims() != null;
     }
 
     public Claims getTokenClaims() {
-        log.info(String.valueOf(Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build()
-                .parseClaimsJws(token)
-                .getBody()));
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)

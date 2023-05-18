@@ -11,72 +11,66 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 public class User {
     @Id
-    @Column(name = "USER_SEQ")
+    @Column(name = "userseq")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userSeq;
-
-    @Column(name = "USER_ID", length = 64, unique = true)
+    @Column(name = "userId", length = 64, unique = true)
     @NotNull
     @Size(max = 64)
     private String userId;
-
-    @Column(name = "USERNAME", length = 100)
+    @Column(name = "username", length = 100)
     @NotNull
     @Size(max = 100)
     private String username;
-
-    @Column(name = "NICKNAME", length = 100)
+    @Column(name = "nickname", length = 100)
     @NotNull
     @Size(max = 100)
     private String nickname;
-
     @JsonIgnore
-    @Column(name = "PASSWORD", length = 128)
+    @Column(name = "password", length = 128)
     @NotNull
     @Size(max = 128)
     private String password;
-
-    @Column(name = "EMAIL", length = 512, unique = true)
+    @Column(name = "email", length = 512, unique = true)
     @NotNull
     @Size(max = 512)
     private String email;
-
-    @Column(name = "EMAIL_VERIFIED_YN", length = 1)
+    @Column(name = "emailverified", length = 1)
     @NotNull
     @Size(min = 1, max = 1)
     private String emailVerifiedYn;
-
-    @Column(name = "PROFILE_IMAGE_URL", length = 512)
+    @Column(name = "profileimage", length = 512)
     @NotNull
     @Size(max = 512)
     private String profileImageUrl;
-
-    @Column(name = "PROVIDER_TYPE", length = 20)
+    @Column(name = "providertype", length = 20)
     @Enumerated(EnumType.STRING)
     @NotNull
     private ProviderType providerType;
-
-    @Column(name = "ROLE_TYPE", length = 20)
+    @Column(name = "roletype", length = 20)
     @Enumerated(EnumType.STRING)
     @NotNull
     private RoleType roleType;
-
-    @Column(name = "CREATED_AT")
+    @Column(name = "createat")
     @NotNull
     private LocalDateTime createdAt;
-
-    @Column(name = "MODIFIED_AT")
+    @Column(name = "modifiedat")
     @NotNull
     private LocalDateTime modifiedAt;
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> postList = new ArrayList<>();
 
     public User(
             @NotNull @Size(max = 64) String userId,

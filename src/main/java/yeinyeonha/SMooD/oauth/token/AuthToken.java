@@ -44,16 +44,25 @@ public class AuthToken {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .setExpiration(expiry)
                 .compact();
+        log.info(AUTHORITIES_KEY);
+        log.info(String.valueOf(key), SignatureAlgorithm.HS256);
+        log.info(String.valueOf(expiry));
         log.info(str);
         return str;
 
     }
 
     public boolean validate() {
+        log.info(this.getTokenClaims().toString());
         return this.getTokenClaims() != null;
     }
 
     public Claims getTokenClaims() {
+        log.info(String.valueOf(Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()));
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)

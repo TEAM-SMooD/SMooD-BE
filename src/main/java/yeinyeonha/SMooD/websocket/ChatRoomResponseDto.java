@@ -10,7 +10,7 @@ public class ChatRoomResponseDto {
     private Long id;
     @Schema(description = "채팅방아이디", type = "String")
     private String roomId;
-    @Schema(description = "소셜아이디", type = "String")
+    @Schema(description = "소셜아이디", type = "Long")
     private Long userId;
     @Schema(description = "카페 관련 자유 톡방", type = "String")
     private String roomName;

@@ -72,7 +72,7 @@ public class CommentController {
             @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
     })
-    @PostMapping("/comments/{postId}")
+    @GetMapping("/comments/{postId}")
     @ResponseBody
     public ResponseDto findCommentsByPostId(@PathVariable Long postId) {
         List<CommentResponseDto> comments = commentService.findCommentsByPostId(postId);

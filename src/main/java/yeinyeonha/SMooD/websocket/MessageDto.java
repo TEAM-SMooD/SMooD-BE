@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 public class MessageDto {
     private Long id;
-    private String senderLoginId;
+    private Long senderLoginId;
     private String nickname;
     private String message;
     private String roomId;

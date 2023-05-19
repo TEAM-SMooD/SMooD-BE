@@ -14,7 +14,7 @@ public class ChatMessage extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String roomId;
-    private String senderLoginId;
+    private Long senderLoginId;
     private String nickname;
     @Column(columnDefinition = "LONGTEXT")
     private String message;

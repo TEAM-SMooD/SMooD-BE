@@ -1,11 +1,14 @@
 package yeinyeonha.SMooD.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Entity
@@ -17,13 +20,16 @@ public class Post extends BaseTimeEntity{
     private Long id;
     private Long category;
     private String store;
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", length = 65535)
     private String title;
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", length = 65535)
     private String contents;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="userseq")
     private User user;
+    @JsonIgnore
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> commentList = new ArrayList<>();
 
     @Builder
     public Post(Long category, String store, String title, String contents, User user) {

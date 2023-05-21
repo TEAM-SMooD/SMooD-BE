@@ -38,7 +38,7 @@ public abstract class BaseTimeEntity {
     public void onPrePersist() {
         this.createdDay = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy년 MM월 dd일"));
         this.createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-        this.modifiedDay = LocalDateTime.now().format(DateTimeFormatter.ofPattern("YY년 MM월 dd일"));
+        this.modifiedDay = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yy.MM.dd"));
         this.modifiedTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
     }
 }

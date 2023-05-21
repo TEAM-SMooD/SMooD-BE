@@ -13,6 +13,7 @@ public class PostResponseDto {
     private final String nickname;
     private final String date;
     private final String time;
+    private final Long count;
 
     public PostResponseDto(Post post) {
         this.postId = post.getId();
@@ -23,5 +24,6 @@ public class PostResponseDto {
         this.nickname = post.getUser().getNickname();
         this.date = post.getModifiedDay();
         this.time = post.getModifiedTime();
+        this.count = (long) post.getCommentList().size();
     }
 }

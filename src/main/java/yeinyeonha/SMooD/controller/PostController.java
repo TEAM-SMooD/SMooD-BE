@@ -68,7 +68,7 @@ public class PostController {
     //모든 게시글 조회
     @Operation(summary = "게시글 모두 조회하기", description = "모든 게시글을 조회합니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "모든 게시글 조회 성공", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "200", description = "모든 게시글 조회 성공", content = @Content(schema = @Schema(implementation = PostResponseDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
@@ -82,7 +82,7 @@ public class PostController {
     //게시글 단건 조회
     @Operation(summary = "특정 게시글 조회하기", description = "특정 아이디의 게시글을 가져옵니다.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "특정 게시글 조회 성공", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "200", description = "특정 게시글 조회 성공", content = @Content(schema = @Schema(implementation = PostResponseDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
@@ -92,5 +92,19 @@ public class PostController {
     public ResponseDto findPostByPostId(@PathVariable Long postId) {
         PostResponseDto postResponseDto = postService.findPostBypostId(postId);
         return ResponseDto.success("result", postResponseDto);
+    }
+    //게시글 카테고리별 조회
+    @Operation(summary = "카테고리별 게시글 조회하기", description = "특정 카테고리의 게시글들을 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "게시글 조회 성공", content = @Content(schema = @Schema(implementation = PostResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
+    })
+    @GetMapping("/post/category/{category}")
+    @ResponseBody
+    public ResponseDto findPostsBycategory(@PathVariable Long category) {
+        List<PostResponseDto> posts = postService.findPostsBycategory(category);
+        return ResponseDto.success("result", posts);
     }
 }

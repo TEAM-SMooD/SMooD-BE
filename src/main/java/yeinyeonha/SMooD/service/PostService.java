@@ -43,13 +43,19 @@ public class PostService {
     //게시글 전체 조회
     @Transactional(readOnly = true)
     public List<PostResponseDto> findAllPosts() {
-        List<Post> post = postRepository.findAll();
-        return post.stream().map(PostResponseDto::new).collect(Collectors.toList());
+        List<Post> posts = postRepository.findAll();
+        return posts.stream().map(PostResponseDto::new).collect(Collectors.toList());
     }
     //게시글 단건 조회
     @Transactional(readOnly = true)
     public PostResponseDto findPostBypostId(Long postId) {
         Post post = postRepository.findById(postId).get();
         return new PostResponseDto((post));
+    }
+    //카테고리 별 게시글 조회
+    @Transactional(readOnly = true)
+    public List<PostResponseDto> findPostsBycategory(Long category) {
+        List<Post> posts = postRepository.findPostsByCategory(category);
+        return posts.stream().map(PostResponseDto::new).collect(Collectors.toList());
     }
 }

@@ -28,7 +28,7 @@ public class Post extends BaseTimeEntity{
     @JoinColumn(name="userseq")
     private User user;
     @JsonIgnore
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> commentList = new ArrayList<>();
 
     @Builder

@@ -14,7 +14,7 @@ spring:
             clientSecret: ${secret-key-naver}
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
-            redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            redirectUri: ${naverurl}
             scope:
               - nickname
               - email
@@ -24,7 +24,7 @@ spring:
             clientSecret: ${secret-key s}
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
-            redirectUri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+            redirectUri: ${kakaourl}
             scope:
               - profile_nickname
               - account_email
@@ -42,11 +42,11 @@ spring:
             userNameAttribute: id
 
 jwt:
-  secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+  secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOdssdfhukfhuehfefjewifesl494823jsnf3r3irlews'
 app:
   auth:
-    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpiry: 1800000
+    tokenSecret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOdssdfhukfhuehfefjewifesl494823jsnf3r3irlews'
+    tokenExpiry: 300000
     refreshTokenExpiry: 604800000
   oauth2:
     authorizedRedirectUris:

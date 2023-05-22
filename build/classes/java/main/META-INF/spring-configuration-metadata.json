@@ -8,12 +8,14 @@
     {
       "name": "app.auth",
       "type": "yeinyeonha.SMooD.config.AppProperties$Auth",
-      "sourceType": "yeinyeonha.SMooD.config.AppProperties"
+      "sourceType": "yeinyeonha.SMooD.config.AppProperties",
+      "sourceMethod": "getAuth()"
     },
     {
       "name": "app.oauth2",
       "type": "yeinyeonha.SMooD.config.AppProperties$OAuth2",
-      "sourceType": "yeinyeonha.SMooD.config.AppProperties"
+      "sourceType": "yeinyeonha.SMooD.config.AppProperties",
+      "sourceMethod": "getOauth2()"
     },
     {
       "name": "cors",
@@ -25,14 +27,12 @@
     {
       "name": "app.auth.refresh-token-expiry",
       "type": "java.lang.Long",
-      "sourceType": "yeinyeonha.SMooD.config.AppProperties$Auth",
-      "defaultValue": 0
+      "sourceType": "yeinyeonha.SMooD.config.AppProperties$Auth"
     },
     {
       "name": "app.auth.token-expiry",
       "type": "java.lang.Long",
-      "sourceType": "yeinyeonha.SMooD.config.AppProperties$Auth",
-      "defaultValue": 0
+      "sourceType": "yeinyeonha.SMooD.config.AppProperties$Auth"
     },
     {
       "name": "app.auth.token-secret",

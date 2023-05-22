@@ -36,6 +36,20 @@ public class CommentController {
         CommentResponseDto commentResponseDto = commentService.createComment(requestDto, userId, postId);
         return ResponseDto.success("result", commentResponseDto);
     }
+    //대댓글 생성
+    @Operation(summary = "대댓글 작성하기", description = "대댓글을 작성합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "대댓글 작성 성공", content = @Content(schema = @Schema(implementation = CommentResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
+    })
+    @PostMapping("/comment/reply/{userId}/{postId}/{commentId}")
+    @ResponseBody
+    public ResponseDto createReplyComment(@PathVariable Long userId, @PathVariable Long postId, @PathVariable Long commentId, @RequestBody CommentRequestDto requestDto) {
+        CommentResponseDto commentResponseDto = commentService.createReplyComment(requestDto, userId, postId, commentId);
+        return ResponseDto.success("result", commentResponseDto);
+    }
     //댓글 수정
     @Operation(summary = "댓글 수정하기", description = "댓글을 수정합니다.")
     @ApiResponses(value = {

@@ -11,6 +11,7 @@ import yeinyeonha.SMooD.domain.User;
 @NoArgsConstructor
 public class CommentRequestDto {
     private String contents;
+    private Long parentId;
     @Builder
     public CommentRequestDto(String contents) {
         this.contents = contents;

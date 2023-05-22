@@ -57,6 +57,7 @@ public class CommentService {
         Comment comment = commentRepository.findById(commentId).get();
         if (comment.getChildren().size() != 0) {
             comment.updateIsDeleted(true);
+            comment.updatecontents("삭제된 댓글입니다.");
         } else {
             commentRepository.delete(getDeletableAncestorComment(comment));
         }

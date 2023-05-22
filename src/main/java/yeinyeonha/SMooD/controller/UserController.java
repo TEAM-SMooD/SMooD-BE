@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import yeinyeonha.SMooD.domain.User;
 import yeinyeonha.SMooD.dto.ResponseDto;
+import yeinyeonha.SMooD.dto.UserNicknameRequestDto;
 import yeinyeonha.SMooD.service.UserService;
 @RestController
 @RequiredArgsConstructor
@@ -40,11 +41,9 @@ public class UserController {
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
     })
     @PutMapping("/user")
-    public ResponseDto updateNickname(@RequestBody String nickname) {
+    public ResponseDto updateNickname(@RequestBody UserNicknameRequestDto requestDto) {
         org.springframework.security.core.userdetails.User principal = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userService.updateNickname(principal.getUsername(), nickname);
+        User user = userService.updateNickname(principal.getUsername(), requestDto);
         return ResponseDto.success("result", user);
     }
 }
-
-

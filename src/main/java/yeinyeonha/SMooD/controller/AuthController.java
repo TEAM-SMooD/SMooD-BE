@@ -89,8 +89,6 @@ public class AuthController {
         // access token 확인
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
-        log.info(CookieUtil.getCookie(request, "refresh_token").toString());
-        log.info(String.valueOf(request.getCookies().length));
         if (!authToken.validate()) {
             return ResponseDto.invalidAccessToken();
         }
@@ -103,7 +101,6 @@ public class AuthController {
         RoleType roleType = RoleType.of(claims.get("role", String.class));
 
         // refresh token
-        log.info(CookieUtil.getCookie(request, "refresh_token").toString());
         String refreshToken = CookieUtil.getCookie(request, REFRESH_TOKEN)
                 .map(Cookie::getValue)
                 .orElse((null));
@@ -148,14 +145,6 @@ public class AuthController {
         }
 
         return ResponseDto.success("result", newAccessToken.getToken());
-    }
-
-    @GetMapping("/test")
-    public void cookie(HttpServletRequest request, HttpServletResponse response) {
-        log.info("실행");
-        log.info(request.getHeader("Cookie"));
-        log.info(Arrays.toString(request.getCookies()));
-        log.info(String.valueOf(request.getCookies().length));
     }
 }
 

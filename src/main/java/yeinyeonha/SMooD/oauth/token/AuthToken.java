@@ -29,20 +29,24 @@ public class AuthToken {
     }
     //리프레시 토큰용
     private String createAuthToken(String id, Date expiry) {
+        Claims claims = Jwts.claims().setSubject(id);
         String str = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
-                .setSubject(id)
+                .setClaims(claims)
                 .setExpiration(expiry)
+                .setIssuedAt(new Date())
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
         return str;
     }
     //그냥 토큰용
     private String createAuthToken(String id, String role, Date expiry) {
+        Claims claims = Jwts.claims().setSubject(id);
+        claims.put(AUTHORITIES_KEY, role);
         String str = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
-                .setSubject(id)
-                .claim(AUTHORITIES_KEY, role)
+                .setIssuedAt(new Date())
+                .setClaims(claims)
                 .setExpiration(expiry)
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();

@@ -15,9 +15,10 @@ public class CookieUtil {
 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            log.info(cookie.getName());
-            log.info(cookie.getValue());
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                log.info(cookie.getName(),"  " ,cookie.getValue());
+            }
         }
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {

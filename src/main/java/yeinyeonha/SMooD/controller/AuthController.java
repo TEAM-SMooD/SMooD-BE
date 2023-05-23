@@ -24,6 +24,7 @@ import yeinyeonha.SMooD.util.HeaderUtil;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 import java.util.Date;
 
 @RestController
@@ -148,8 +149,10 @@ public class AuthController {
     }
 
     @GetMapping("/test")
-    public String cookie(@CookieValue("refresh_token") String refresh_token1) {
+    public String cookie(@CookieValue("refresh_token") String refresh_token1, HttpServletRequest request, HttpServletResponse response) {
         log.info("실행");
+        log.info(Arrays.toString(request.getCookies()));
+        log.info(String.valueOf(request.getCookies().length));
         log.info(refresh_token1);
         return refresh_token1;
     }

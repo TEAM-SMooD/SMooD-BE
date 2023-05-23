@@ -25,8 +25,7 @@ public class AuthTokenProvider {
     private static final String AUTHORITIES_KEY = "role";
 
     public AuthTokenProvider(String secret) {
-        byte[] keyBytes = Decoders.BASE64.decode(secret);
-        this.key = Keys.hmacShaKeyFor(keyBytes);
+        this.key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     public AuthToken createAuthToken(String id, Date expiry) {

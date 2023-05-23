@@ -90,6 +90,7 @@ public class AuthController {
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
         log.info(CookieUtil.getCookie(request, "refresh_token").toString());
+        log.info(String.valueOf(request.getCookies().length));
         if (!authToken.validate()) {
             return ResponseDto.invalidAccessToken();
         }

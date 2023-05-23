@@ -4,6 +4,11 @@ server:
     remoteip:
       remote-ip-header: x-forwarded-for
       protocol-header: x-forwarded-proto
+  servlet:
+    session:
+      cookie:
+        same-site: none
+        secure: true
 
 spring:
   application:

@@ -1,6 +1,7 @@
 package yeinyeonha.SMooD.oauth.token;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +13,7 @@ import yeinyeonha.SMooD.oauth.exception.TokenValidFailedException;
 
 import java.security.Key;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -23,7 +25,8 @@ public class AuthTokenProvider {
     private static final String AUTHORITIES_KEY = "role";
 
     public AuthTokenProvider(String secret) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        byte[] keyBytes = Decoders.BASE64.decode(secret);
+        this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
     public AuthToken createAuthToken(String id, Date expiry) {

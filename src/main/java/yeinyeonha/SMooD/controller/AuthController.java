@@ -89,6 +89,7 @@ public class AuthController {
         // access token 확인
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
+        log.info(CookieUtil.getCookie(request, "refresh_token").toString());
         if (!authToken.validate()) {
             return ResponseDto.invalidAccessToken();
         }

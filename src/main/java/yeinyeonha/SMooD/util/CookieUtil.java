@@ -33,14 +33,12 @@ public class CookieUtil {
     }
 
     public static void addCookie(HttpServletResponse response, String name, String value, int maxAge) {
-        ResponseCookie cookie = ResponseCookie.from(name, value)
-                .path("/")
-                .sameSite("None")
-                .httpOnly(true)
-                .secure(true)
-                .domain("smood.org")
-                .maxAge(maxAge)
-                .build();
+        Cookie cookie = new Cookie(name, value);
+        cookie.setPath("/");
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
+        cookie.setDomain("smood.org");
+        cookie.setMaxAge(maxAge);
         response.addHeader("Set-Cookie", cookie.toString());
     }
 

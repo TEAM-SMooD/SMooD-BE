@@ -30,6 +30,7 @@ public class CookieUtil {
                 .sameSite("None")
                 .httpOnly(false)
                 .secure(true)
+                .domain("smood.org")
                 .maxAge(maxAge)
                 .build();
         response.addHeader("Set-Cookie", cookie.toString());

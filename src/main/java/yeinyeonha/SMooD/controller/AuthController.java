@@ -153,6 +153,7 @@ public class AuthController {
     @GetMapping("/test")
     public void cookie(HttpServletRequest request, HttpServletResponse response) {
         log.info("실행");
+        log.info(request.getHeader("Cookie"));
         log.info(Arrays.toString(request.getCookies()));
         log.info(String.valueOf(request.getCookies().length));
     }

@@ -149,12 +149,10 @@ public class AuthController {
     }
 
     @GetMapping("/test")
-    public String cookie(@CookieValue("refresh_token") String refresh_token1, HttpServletRequest request, HttpServletResponse response) {
+    public void cookie(HttpServletRequest request, HttpServletResponse response) {
         log.info("실행");
         log.info(Arrays.toString(request.getCookies()));
         log.info(String.valueOf(request.getCookies().length));
-        log.info(refresh_token1);
-        return refresh_token1;
     }
 }
 

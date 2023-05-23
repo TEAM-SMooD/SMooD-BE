@@ -39,7 +39,7 @@ public class CookieUtil {
         cookie.setHttpOnly(true);
         cookie.setDomain("smood.org");
         cookie.setMaxAge(maxAge);
-        response.addHeader("Set-Cookie", cookie.toString());
+        response.addCookie(cookie);
     }
 
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {

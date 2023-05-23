@@ -15,7 +15,10 @@ public class CookieUtil {
 
     public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
         Cookie[] cookies = request.getCookies();
-        log.info(Arrays.toString(cookies));
+        for (Cookie cookie : cookies) {
+            log.info(cookie.getName());
+            log.info(cookie.getValue());
+        }
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
                 if (name.equals(cookie.getName())) {
@@ -40,7 +43,6 @@ public class CookieUtil {
 
     public static void deleteCookie(HttpServletRequest request, HttpServletResponse response, String name) {
         Cookie[] cookies = request.getCookies();
-
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
                 if (name.equals(cookie.getName())) {

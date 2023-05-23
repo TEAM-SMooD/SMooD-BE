@@ -36,7 +36,7 @@ public class CookieUtil {
         ResponseCookie cookie = ResponseCookie.from(name, value)
                 .path("/")
                 .sameSite("None")
-                .httpOnly(false)
+                .httpOnly(true)
                 .secure(true)
                 .domain("smood.org")
                 .maxAge(maxAge)

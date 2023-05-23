@@ -100,6 +100,7 @@ public class AuthController {
         RoleType roleType = RoleType.of(claims.get("role", String.class));
 
         // refresh token
+        log.info(CookieUtil.getCookie(request, "refresh_token").toString());
         String refreshToken = CookieUtil.getCookie(request, REFRESH_TOKEN)
                 .map(Cookie::getValue)
                 .orElse((null));

@@ -4,7 +4,6 @@ import io.jsonwebtoken.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import yeinyeonha.SMooD.config.AppProperties;
 
 import java.security.Key;
 import java.util.Date;
@@ -16,7 +15,6 @@ public class AuthToken {
     @Getter
     private final String token;
     private final Key key;
-    private AppProperties appProperties;
     private static final String AUTHORITIES_KEY = "role";
 
     AuthToken(String id, Date expiry, Key key) {
@@ -36,7 +34,7 @@ public class AuthToken {
                 .setClaims(claims)
                 .setExpiration(expiry)
                 .setIssuedAt(new Date())
-                .signWith(SignatureAlgorithm.HS256, appProperties.getAuth().getTokenSecret())
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
         return str;
     }
@@ -49,7 +47,7 @@ public class AuthToken {
                 .setIssuedAt(new Date())
                 .setClaims(claims)
                 .setExpiration(expiry)
-                .signWith(SignatureAlgorithm.HS256, appProperties.getAuth().getTokenSecret())
+                .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
         return str;
 

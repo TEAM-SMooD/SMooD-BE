@@ -40,9 +40,12 @@ spring:
             tokenUri: https://kauth.kakao.com/oauth/token
             userInfoUri: https://kapi.kakao.com/v2/user/me
             userNameAttribute: id
+
+jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+
 app:
   auth:
-    tokenSecret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOdssdfhukfhuehfefjewifesl494823jsnf3r3irlews'
+    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
     tokenExpiry: 300000
     refreshTokenExpiry: 604800000
   oauth2:

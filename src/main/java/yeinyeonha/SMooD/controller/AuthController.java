@@ -148,7 +148,7 @@ public class AuthController {
     }
 
     @GetMapping("/test")
-    public String cookie(@CookieValue String refresh_token, @CookieValue("refresh_token") String refresh_token1) {
+    public String cookie(@CookieValue("refresh_token") String refresh_token1) {
         log.info("실행");
         log.info(refresh_token1);
         return refresh_token1;

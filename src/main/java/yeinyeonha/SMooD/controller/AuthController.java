@@ -84,7 +84,7 @@ public class AuthController {
     }
 
     @GetMapping("/auth/refresh")
-    public ResponseDto refreshToken (@RequestHeader(value="cookie") String refresh_token, HttpServletRequest request, HttpServletResponse response) {
+    public ResponseDto refreshToken (HttpServletRequest request, HttpServletResponse response) {
         // access token 확인
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
@@ -100,8 +100,11 @@ public class AuthController {
         RoleType roleType = RoleType.of(claims.get("role", String.class));
 
         // refresh token
-        log.info(refresh_token);
-        String refreshToken = refresh_token;
+        log.info(CookieUtil.getCookie(request, "refresh_token").toString());
+        String refreshToken = CookieUtil.getCookie(request, REFRESH_TOKEN)
+                .map(Cookie::getValue)
+                .orElse((null));
+        log.info(refreshToken);
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
 
         if (authRefreshToken.validate()) {

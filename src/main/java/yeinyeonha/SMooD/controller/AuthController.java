@@ -110,7 +110,7 @@ public class AuthController {
                 .map(Cookie::getValue)
                 .orElse((null));
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
-        if (authRefreshToken.validate()) {
+        if (!authRefreshToken.validate()) {
             return ResponseDto.invalidRefreshToken();
         }
         // userId refresh token 으로 DB 확인

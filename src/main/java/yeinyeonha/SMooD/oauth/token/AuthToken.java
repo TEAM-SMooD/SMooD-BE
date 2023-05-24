@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.security.Key;
+import java.util.Arrays;
 import java.util.Date;
 
 @Slf4j
@@ -58,7 +59,9 @@ public class AuthToken {
     }
 
     public Claims getTokenClaims() {
-        log.info(String.valueOf(key));
+        log.info("getTokenClaims");
+        log.info(key.toString());
+        log.info(Arrays.toString(key.getEncoded()));
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)
@@ -80,7 +83,9 @@ public class AuthToken {
     }
 
     public Claims getExpiredTokenClaims() {
-        log.info(String.valueOf(key));
+        log.info("getExpiredTokenClaims");
+        log.info(key.toString());
+        log.info(Arrays.toString(key.getEncoded()));
         try {
             Jwts.parserBuilder()
                     .setSigningKey(key)

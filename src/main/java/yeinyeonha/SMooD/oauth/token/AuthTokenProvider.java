@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import yeinyeonha.SMooD.oauth.exception.TokenValidFailedException;
 
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Arrays;
 import java.util.Base64;
@@ -25,7 +26,7 @@ public class AuthTokenProvider {
     private static final String AUTHORITIES_KEY = "role";
 
     public AuthTokenProvider(String secret) {
-        this.key = Keys.hmacShaKeyFor(secret.getBytes());
+        this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
     public AuthToken createAuthToken(String id, Date expiry) {

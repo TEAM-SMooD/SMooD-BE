@@ -59,9 +59,6 @@ public class AuthToken {
     }
 
     public Claims getTokenClaims() {
-        log.info("getTokenClaims");
-        log.info(key.toString());
-        log.info(Arrays.toString(key.getEncoded()));
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)
@@ -85,7 +82,6 @@ public class AuthToken {
     public Claims getExpiredTokenClaims() {
         log.info("getExpiredTokenClaims");
         log.info(key.toString());
-        log.info(Arrays.toString(key.getEncoded()));
         try {
             Jwts.parserBuilder()
                     .setSigningKey(key)

@@ -15,15 +15,19 @@ public class AuthToken {
 
     @Getter
     private final String token;
+    @Getter
     private final Key key;
     private static final String AUTHORITIES_KEY = "role";
-
     AuthToken(String id, Date expiry, Key key) {
+        log.info("여기는 첫번째 AuthToken");
+        log.info(Arrays.toString(key.getEncoded()));
         this.key = key;
         this.token = createAuthToken(id, expiry);
     }
 
     AuthToken(String id, String role, Date expiry, Key key) {
+        log.info("여기는 두번째 AuthToken");
+        log.info(Arrays.toString(key.getEncoded()));
         this.key = key;
         this.token = createAuthToken(id, role, expiry);
     }
@@ -62,7 +66,6 @@ public class AuthToken {
 
     public Claims getTokenClaims() {
 //        log.info("그리고 여기차례");
-        log.info(key.toString());
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)
@@ -84,8 +87,6 @@ public class AuthToken {
     }
 
     public Claims getExpiredTokenClaims() {
-        log.info("getExpiredTokenClaims");
-        log.info(key.toString());
         try {
             Jwts.parserBuilder()
                     .setSigningKey(key)
@@ -96,6 +97,10 @@ public class AuthToken {
             return e.getClaims();
         }
         return null;
+    }
+
+    public Key getKey() {
+        return key;
     }
 }
 

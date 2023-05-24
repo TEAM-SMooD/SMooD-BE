@@ -58,6 +58,7 @@ public class AuthToken {
     }
 
     public Claims getTokenClaims() {
+        log.info(String.valueOf(key));
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)
@@ -79,6 +80,7 @@ public class AuthToken {
     }
 
     public Claims getExpiredTokenClaims() {
+        log.info(String.valueOf(key));
         try {
             Jwts.parserBuilder()
                     .setSigningKey(key)

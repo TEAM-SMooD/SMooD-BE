@@ -46,12 +46,16 @@ public class AuthController {
             HttpServletResponse response,
             @RequestBody AuthReqModel authReqModel
     ) {
+        log.info("login");
+        log.info(appProperties.getAuth().getTokenSecret());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authReqModel.getId(),
                         authReqModel.getPassword()
                 )
         );
+        log.info("login");
+        log.info(appProperties.getAuth().getTokenSecret());
         String userId = authReqModel.getId();
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -92,6 +96,7 @@ public class AuthController {
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
         if (!authToken.validate()) {
+            log.info("여기서 걸림");
             return ResponseDto.invalidAccessToken();
         }
         log.info("여기까지 OK1");

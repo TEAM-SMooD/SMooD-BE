@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -91,6 +92,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 userInfo.getId(),
                 new Date(now.getTime() + refreshTokenExpiry)
         );
+        log.info("여기는 refreshToken");
+        log.info(Arrays.toString(refreshToken.getKey().getEncoded()));
         log.info(appProperties.getAuth().getTokenSecret());
         // DB 저장
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userInfo.getId());

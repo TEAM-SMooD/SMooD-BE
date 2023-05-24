@@ -21,7 +21,7 @@ spring:
             clientName: Naver
           kakao:
             clientId: ${client-id}
-            clientSecret: ${secret-key s}
+            clientSecret: ${secret-key}
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
             redirectUri: ${kakaourl}

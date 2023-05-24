@@ -92,38 +92,41 @@ public class AuthController {
         if (!authToken.validate()) {
             return ResponseDto.invalidAccessToken();
         }
+        log.info("여기까지 OK1");
         // expired access token 인지 확인
         Claims claims = authToken.getExpiredTokenClaims();
         if (claims == null) {
             return ResponseDto.notExpiredTokenYet();
         }
+        log.info("여기까지 OK2");
         String userId = claims.getSubject();
         RoleType roleType = RoleType.of(claims.get("role", String.class));
-
+        log.info("여기까지 OK3");
         // refresh token
         String refreshToken = CookieUtil.getCookie(request, REFRESH_TOKEN)
                 .map(Cookie::getValue)
                 .orElse((null));
         log.info(refreshToken);
+        log.info("여기까지 OK4");
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
 
         if (!authRefreshToken.validate()) {
             return ResponseDto.invalidRefreshToken();
         }
-
+        log.info("여기까지 OK5");
         // userId refresh token 으로 DB 확인
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserIdAndRefreshToken(userId, refreshToken);
         if (userRefreshToken == null) {
             return ResponseDto.invalidRefreshToken();
         }
-
+        log.info("여기까지 OK6");
         Date now = new Date();
         AuthToken newAccessToken = tokenProvider.createAuthToken(
                 userId,
                 roleType.getCode(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
-
+        log.info("여기까지 OK7");
         long validTime = authRefreshToken.getTokenClaims().getExpiration().getTime() - now.getTime();
 
         // refresh 토큰 기간이 3일 이하로 남은 경우, refresh 토큰 갱신

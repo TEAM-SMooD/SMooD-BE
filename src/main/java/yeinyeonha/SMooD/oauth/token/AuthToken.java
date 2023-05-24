@@ -56,10 +56,12 @@ public class AuthToken {
 
     public boolean validate() {
         log.info(this.getToken());
+        log.info("여기까지 왔지롱");
         return this.getTokenClaims() != null;
     }
 
     public Claims getTokenClaims() {
+        log.info("그리고 여기차례");
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)

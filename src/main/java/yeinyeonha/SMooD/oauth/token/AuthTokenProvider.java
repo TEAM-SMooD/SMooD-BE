@@ -38,8 +38,6 @@ public class AuthTokenProvider {
     }
 
     public AuthToken convertAuthToken(String token) {
-        log.info(key.toString());
-        log.info(Arrays.toString(key.getEncoded()));
         return new AuthToken(token, key);
     }
 

@@ -45,7 +45,7 @@ jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
 
 app:
   auth:
-    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
+    tokenSecret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
     tokenExpiry: 300000
     refreshTokenExpiry: 604800000
   oauth2:

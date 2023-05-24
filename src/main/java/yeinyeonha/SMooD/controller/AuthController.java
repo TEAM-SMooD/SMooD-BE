@@ -111,7 +111,7 @@ public class AuthController {
         log.info("여기까지 OK4");
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
         log.info(authRefreshToken.getToken());
-        if (!authRefreshToken.validate()) {
+        if (authRefreshToken.validate()) {
             log.info("에러발생피융피융");
             return ResponseDto.invalidRefreshToken();
         }

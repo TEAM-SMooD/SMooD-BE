@@ -62,6 +62,7 @@ public class AuthToken {
 
     public Claims getTokenClaims() {
 //        log.info("그리고 여기차례");
+        log.info(key.toString());
         try {
             return Jwts.parserBuilder()
                     .setSigningKey(key)

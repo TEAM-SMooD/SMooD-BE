@@ -109,7 +109,7 @@ public class AuthController {
         log.info(refreshToken);
         log.info("여기까지 OK4");
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
-
+        log.info(authRefreshToken.getToken());
         if (!authRefreshToken.validate()) {
             return ResponseDto.invalidRefreshToken();
         }

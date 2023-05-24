@@ -73,7 +73,7 @@ public class AuthToken {
         } catch (MalformedJwtException e) {
             log.info("Invalid JWT token.");
         } catch (ExpiredJwtException e) {
-            return e.getClaims();
+//            return e.getClaims();
         } catch (UnsupportedJwtException e) {
 //            log.info("Unsupported JWT token.");
         } catch (IllegalArgumentException e) {

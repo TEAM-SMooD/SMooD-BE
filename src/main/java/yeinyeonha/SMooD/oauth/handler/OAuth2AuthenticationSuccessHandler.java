@@ -83,8 +83,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 roleType.getCode(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
-        log.info(appProperties.getAuth().getTokenSecret());
-        log.info("여기는 OAuth2AuthenticationSuccessHandler");
         // refresh 토큰 설정
         long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
 
@@ -92,9 +90,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 userInfo.getId(),
                 new Date(now.getTime() + refreshTokenExpiry)
         );
-        log.info("여기는 refreshToken");
-        log.info(Arrays.toString(refreshToken.getKey().getEncoded()));
-        log.info(appProperties.getAuth().getTokenSecret());
         // DB 저장
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userInfo.getId());
         if (userRefreshToken != null) {

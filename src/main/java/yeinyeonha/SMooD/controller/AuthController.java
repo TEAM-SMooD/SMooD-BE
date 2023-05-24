@@ -92,37 +92,27 @@ public class AuthController {
     @GetMapping("/auth/refresh")
     public ResponseDto refreshToken (HttpServletRequest request, HttpServletResponse response) {
         // access token 확인
-        log.info("여기부터 시작");
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
-        if (!authToken.validate()) {
-            log.info("여기서 걸림");
-            return ResponseDto.invalidAccessToken();
-        }
-        log.info("여기까지 OK1");
+//        if (!authToken.validate()) {
+//            log.info("여기서 걸림");
+//            return ResponseDto.invalidAccessToken();
+//        }
         // expired access token 인지 확인
         Claims claims = authToken.getExpiredTokenClaims();
         if (claims == null) {
             return ResponseDto.notExpiredTokenYet();
         }
-        log.info("여기까지 OK2");
         String userId = claims.getSubject();
         RoleType roleType = RoleType.of(claims.get("role", String.class));
-        log.info("여기까지 OK3");
         // refresh token
         String refreshToken = CookieUtil.getCookie(request, REFRESH_TOKEN)
                 .map(Cookie::getValue)
                 .orElse((null));
-        log.info(refreshToken);
-        log.info("여기까지 OK4");
-        log.info(appProperties.getAuth().getTokenSecret());
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
-        log.info(authRefreshToken.getToken());
         if (authRefreshToken.validate()) {
-            log.info("에러발생피융피융");
             return ResponseDto.invalidRefreshToken();
         }
-        log.info("여기까지 OK5");
         // userId refresh token 으로 DB 확인
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserIdAndRefreshToken(userId, refreshToken);
         if (userRefreshToken == null) {

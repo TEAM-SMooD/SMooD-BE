@@ -26,10 +26,7 @@ public class AuthTokenProvider {
     private static final String AUTHORITIES_KEY = "role";
 
     public AuthTokenProvider(String secret) {
-        log.info(secret);
         this.key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-        log.info("여기는 AuthTokenProvider");
-        log.info(Arrays.toString(key.getEncoded()));
     }
 
     public AuthToken createAuthToken(String id, Date expiry) {

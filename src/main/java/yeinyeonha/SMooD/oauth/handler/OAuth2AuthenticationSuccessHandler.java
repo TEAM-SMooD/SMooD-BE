@@ -1,6 +1,7 @@
 package yeinyeonha.SMooD.oauth.handler;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -35,6 +36,7 @@ import static yeinyeonha.SMooD.repository.OAuth2AuthorizationRequestBasedOnCooki
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final AuthTokenProvider tokenProvider;
@@ -80,15 +82,15 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 roleType.getCode(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
-
+        log.info(appProperties.getAuth().getTokenSecret());
         // refresh 토큰 설정
         long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
 
         AuthToken refreshToken = tokenProvider.createAuthToken(
-                appProperties.getAuth().getTokenSecret(),
+                userInfo.getId(),
                 new Date(now.getTime() + refreshTokenExpiry)
         );
-
+        log.info(appProperties.getAuth().getTokenSecret());
         // DB 저장
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userInfo.getId());
         if (userRefreshToken != null) {

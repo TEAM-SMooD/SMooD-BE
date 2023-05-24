@@ -75,15 +75,15 @@ public class AuthToken {
                     .parseClaimsJws(token)
                     .getBody();
         } catch (SecurityException e) {
-//            log.info("Invalid JWT signature.");
+            log.info("Invalid JWT signature.");
         } catch (MalformedJwtException e) {
             log.info("Invalid JWT token.");
         } catch (ExpiredJwtException e) {
-//            return e.getClaims();
+            log.info("기간이 만료됨");
         } catch (UnsupportedJwtException e) {
-//            log.info("Unsupported JWT token.");
+            log.info("Unsupported JWT token.");
         } catch (IllegalArgumentException e) {
-//            log.info("JWT token compact of handler are invalid.");
+            log.info("JWT token compact of handler are invalid.");
         }
         return null;
     }
@@ -99,10 +99,6 @@ public class AuthToken {
             return e.getClaims();
         }
         return null;
-    }
-
-    public Key getKey() {
-        return key;
     }
 }
 

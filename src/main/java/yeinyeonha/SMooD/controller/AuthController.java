@@ -87,6 +87,7 @@ public class AuthController {
     @GetMapping("/auth/refresh")
     public ResponseDto refreshToken (HttpServletRequest request, HttpServletResponse response) {
         // access token 확인
+        log.info("여기부터 시작");
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
         if (!authToken.validate()) {

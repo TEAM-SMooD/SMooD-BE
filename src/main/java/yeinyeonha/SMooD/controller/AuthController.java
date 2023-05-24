@@ -90,9 +90,9 @@ public class AuthController {
         log.info("여기부터 시작");
         String accessToken = HeaderUtil.getAccessToken(request);
         AuthToken authToken = tokenProvider.convertAuthToken(accessToken);
-        if (!authToken.validate()) {
-            return ResponseDto.invalidAccessToken();
-        }
+//        if (!authToken.validate()) {
+//            return ResponseDto.invalidAccessToken();
+//        }
         log.info("여기까지 OK1");
         // expired access token 인지 확인
         Claims claims = authToken.getExpiredTokenClaims();

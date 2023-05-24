@@ -14,6 +14,6 @@ public class JwtConfig {
 
     @Bean
     public AuthTokenProvider jwtProvider() {
-        return new AuthTokenProvider(Base64.getEncoder().encodeToString(secret.getBytes()));
+        return new AuthTokenProvider(secret);
     }
 }

@@ -107,7 +107,7 @@ public class AuthController {
         log.info(refreshToken);
         AuthToken authRefreshToken = tokenProvider.convertAuthToken(refreshToken);
 
-        if (authRefreshToken.validate()) {
+        if (!authRefreshToken.validate()) {
             return ResponseDto.invalidRefreshToken();
         }
 

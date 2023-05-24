@@ -65,6 +65,8 @@ public class AuthToken {
     }
 
     public Claims getTokenClaims() {
+        log.info("token");
+        log.info(token);
 //        log.info("그리고 여기차례");
         try {
             return Jwts.parserBuilder()

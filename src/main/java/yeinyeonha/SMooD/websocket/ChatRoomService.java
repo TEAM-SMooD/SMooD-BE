@@ -33,4 +33,9 @@ public class ChatRoomService {
         ChatRoom chatRoom = chatRoomRepository.save(ChatRequestDto.toEntity(chatRequestDto));
         return new ChatRoomResponseDto(chatRoom);
     }
+
+    //채팅방 삭제
+    public void deleteRoom(Long chatRoomId) {
+        chatRoomRepository.deleteById(chatRoomId);
+    }
 }

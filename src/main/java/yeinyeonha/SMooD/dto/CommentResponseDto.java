@@ -24,8 +24,8 @@ public class CommentResponseDto {
         this.nickname = comment.getUser().getNickname();
         this.postId = comment.getPost().getId();
         this.parentId = comment.getParent() == null ? null : comment.getParent().getId();
-        this.date = comment.getCreatedDay();
-        this.time = comment.getCreateTime();
+        this.date = comment.getModifiedDay();
+        this.time = comment.getModifiedTime();
         this.isDeleted = comment.getIsDeleted();
     }
 }

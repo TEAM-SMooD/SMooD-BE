@@ -58,7 +58,21 @@ public class ChatRoomController {
     // 특정 채팅방 조회
     @GetMapping("/room/{roomId}")
     @ResponseBody
-    public ResponseDto roomInfo(@PathVariable Long Id) {
-        return ResponseDto.success("result", chatRoomService.findById(Id));
+    public ResponseDto roomInfo(@PathVariable Long roomId) {
+        return ResponseDto.success("result", chatRoomService.findById(roomId));
+    }
+    @Operation(summary = "채팅방 삭제", description = "자신이 만든 채팅방을 삭제합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "채팅방 삭제 성공", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
+    })
+    // 특정 채팅방 조회
+    @DeleteMapping("/room/{roomId}")
+    @ResponseBody
+    public ResponseDto deleteChat(@PathVariable Long roomId) {
+        chatRoomService.deleteRoom(roomId);
+        return ResponseDto.success("result", "success");
     }
 }

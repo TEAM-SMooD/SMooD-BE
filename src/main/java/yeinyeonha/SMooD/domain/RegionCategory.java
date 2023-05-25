@@ -16,7 +16,10 @@ public class RegionCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "region_category_Id")
     private Long id;
-    private String url;
+    private String url1;
+    private String url2;
+    private String url3;
+    private String url4;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="regionId")
     private Region region;

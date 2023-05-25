@@ -35,7 +35,7 @@ public class ChatRoomService {
     }
 
     //채팅방 삭제
-    public void deleteRoom(Long chatRoomId) {
-        chatRoomRepository.deleteById(chatRoomId);
+    public void deleteRoom(String chatRoomId) {
+        chatRoomRepository.deleteChatRoomByRoomId(chatRoomId);
     }
 }

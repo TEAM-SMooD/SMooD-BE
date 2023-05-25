@@ -68,10 +68,10 @@ public class ChatRoomController {
             @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
     })
-    // 특정 채팅방 조회
-    @DeleteMapping("/room/{roomId}")
+    // 특정 채팅방 삭제
+    @DeleteMapping("/room")
     @ResponseBody
-    public ResponseDto deleteChat(@PathVariable Long roomId) {
+    public ResponseDto deleteChat(@RequestParam String roomId) {
         chatRoomService.deleteRoom(roomId);
         return ResponseDto.success("result", "success");
     }

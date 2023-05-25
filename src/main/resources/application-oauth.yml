@@ -41,18 +41,18 @@ spring:
             userInfoUri: https://kapi.kakao.com/v2/user/me
             userNameAttribute: id
 
-jwt.secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
+jwt.secret: ${secret}
 
 app:
   auth:
-    tokenSecret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOds'
-    tokenExpiry: 100000
+    tokenSecret: ${secret}
+    tokenExpiry: 360000
     refreshTokenExpiry: 604800000
   oauth2:
     authorizedRedirectUris:
       - ${redirect-url}
 cors:
-  allowed-origins: 'https://smood.org, http://localhost:3000'
+  allowed-origins: "http://localhost:3000"
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
   allowed-headers: '*'
   max-age: 3600

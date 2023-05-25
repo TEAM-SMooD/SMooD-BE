@@ -1,7 +1,6 @@
 package yeinyeonha.SMooD.oauth.handler;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -27,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -37,7 +35,6 @@ import static yeinyeonha.SMooD.repository.OAuth2AuthorizationRequestBasedOnCooki
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final AuthTokenProvider tokenProvider;
@@ -91,31 +88,19 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 new Date(now.getTime() + refreshTokenExpiry)
         );
         // DB 저장
-        log.info("refresh_token");
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userInfo.getId());
         if (userRefreshToken != null) {
-            log.info("not null");
-            log.info(userRefreshToken.getRefreshToken());
-            log.info(refreshToken.getToken());
             userRefreshToken.setRefreshToken(refreshToken.getToken());
             userRefreshTokenRepository.saveAndFlush(userRefreshToken);
-            log.info(userRefreshToken.getRefreshToken());
         } else {
             userRefreshToken = new UserRefreshToken(userInfo.getId(), refreshToken.getToken());
-            log.info("null");
             userRefreshTokenRepository.saveAndFlush(userRefreshToken);
-            log.info(userRefreshToken.getRefreshToken());
         }
 
         int cookieMaxAge = (int) refreshTokenExpiry / 60;
-        log.info("이 곳은 쿠키1");
-        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).get().getValue());
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
-        log.info("이 곳은 쿠키2");
-        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).get().getValue());
         CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
-        log.info("이 곳은 쿠키3");
-        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).get().getValue());
+
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", accessToken.getToken())
                 .build().toUriString();

@@ -2,7 +2,6 @@ package yeinyeonha.SMooD.controller;
 
 import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,13 +23,11 @@ import yeinyeonha.SMooD.util.HeaderUtil;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Arrays;
 import java.util.Date;
 
 @RestController
 @RequiredArgsConstructor
 @ApiIgnore
-@Slf4j
 @RequestMapping("/api")
 public class AuthController {
     private final AppProperties appProperties;
@@ -46,16 +43,12 @@ public class AuthController {
             HttpServletResponse response,
             @RequestBody AuthReqModel authReqModel
     ) {
-        log.info("login");
-        log.info(appProperties.getAuth().getTokenSecret());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authReqModel.getId(),
                         authReqModel.getPassword()
                 )
         );
-        log.info("login");
-        log.info(appProperties.getAuth().getTokenSecret());
         String userId = authReqModel.getId();
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -70,8 +63,6 @@ public class AuthController {
                 appProperties.getAuth().getTokenSecret(),
                 new Date(now.getTime() + refreshTokenExpiry)
         );
-        log.info("login");
-        log.info(appProperties.getAuth().getTokenSecret());
         // userId refresh token 으로 DB 확인
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userId);
         if (userRefreshToken == null) {

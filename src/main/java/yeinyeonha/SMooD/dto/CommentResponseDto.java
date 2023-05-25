@@ -2,7 +2,6 @@ package yeinyeonha.SMooD.dto;
 
 import lombok.Getter;
 import yeinyeonha.SMooD.domain.Comment;
-import yeinyeonha.SMooD.domain.Post;
 
 import java.util.ArrayList;
 import java.util.List;

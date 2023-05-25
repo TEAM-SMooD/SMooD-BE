@@ -106,13 +106,13 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         int cookieMaxAge = (int) refreshTokenExpiry / 60;
         log.info("이 곳은 쿠키1");
-        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).toString());
+        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).get().getValue());
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
         log.info("이 곳은 쿠키2");
-        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).toString());
+        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).get().getValue());
         CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
         log.info("이 곳은 쿠키3");
-        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).toString());
+        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).get().getValue());
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", accessToken.getToken())
                 .build().toUriString();

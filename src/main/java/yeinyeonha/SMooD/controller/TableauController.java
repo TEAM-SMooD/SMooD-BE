@@ -9,7 +9,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import yeinyeonha.SMooD.dto.ResponseDto;
-import yeinyeonha.SMooD.dto.TableauRequestDto;
 import yeinyeonha.SMooD.dto.TableauResponseDto;
 import yeinyeonha.SMooD.service.RegionCategoryService;
 
@@ -28,8 +27,8 @@ public class TableauController {
             @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
     })
     @GetMapping("/tableau")
-    public ResponseDto<?> findTableau(@RequestBody TableauRequestDto requestDto) {
-        TableauResponseDto tableau = regionCategoryService.findTableauByRegionAndCategory(requestDto);
+    public ResponseDto<?> findTableau(@RequestParam("dong") String dong, @RequestParam("category") String category) {
+        TableauResponseDto tableau = regionCategoryService.findTableauByRegionAndCategory(dong, category);
         return ResponseDto.success("result", tableau);
     }
 }

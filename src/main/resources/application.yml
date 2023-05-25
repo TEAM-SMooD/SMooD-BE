@@ -9,6 +9,10 @@ server:
       cookie:
         same-site: none
         secure: true
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
 
 spring:
   application:

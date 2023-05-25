@@ -91,19 +91,28 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                 new Date(now.getTime() + refreshTokenExpiry)
         );
         // DB 저장
+        log.info("refresh_token");
         UserRefreshToken userRefreshToken = userRefreshTokenRepository.findByUserId(userInfo.getId());
         if (userRefreshToken != null) {
+            log.info("not null");
+            log.info(userRefreshToken.getRefreshToken());
             userRefreshToken.setRefreshToken(refreshToken.getToken());
         } else {
             userRefreshToken = new UserRefreshToken(userInfo.getId(), refreshToken.getToken());
+            log.info("null");
             userRefreshTokenRepository.saveAndFlush(userRefreshToken);
+            log.info(userRefreshToken.getRefreshToken());
         }
 
         int cookieMaxAge = (int) refreshTokenExpiry / 60;
-
+        log.info("이 곳은 쿠키1");
+        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).toString());
         CookieUtil.deleteCookie(request, response, REFRESH_TOKEN);
+        log.info("이 곳은 쿠키2");
+        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).toString());
         CookieUtil.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
-
+        log.info("이 곳은 쿠키3");
+        log.info(CookieUtil.getCookie(request, REFRESH_TOKEN).toString());
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", accessToken.getToken())
                 .build().toUriString();

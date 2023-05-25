@@ -19,6 +19,7 @@ import yeinyeonha.SMooD.domain.User;
 import yeinyeonha.SMooD.dto.CommentResponseDto;
 import yeinyeonha.SMooD.dto.PostResponseDto;
 import yeinyeonha.SMooD.dto.ResponseDto;
+import yeinyeonha.SMooD.dto.TableauResponseDto;
 import yeinyeonha.SMooD.websocket.ChatRoomResponseDto;
 
 import java.util.Arrays;
@@ -33,7 +34,12 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.OAS_30)
-                .additionalModels(typeResolver.resolve(ResponseDto.class), typeResolver.resolve(ChatRoomResponseDto.class), typeResolver.resolve(User.class), typeResolver.resolve(PostResponseDto.class), typeResolver.resolve(CommentResponseDto.class))
+                .additionalModels(typeResolver.resolve(ResponseDto.class),
+                        typeResolver.resolve(ChatRoomResponseDto.class),
+                        typeResolver.resolve(User.class),
+                        typeResolver.resolve(PostResponseDto.class),
+                        typeResolver.resolve(CommentResponseDto.class),
+                        typeResolver.resolve(TableauResponseDto.class))
                 .securityContexts(Arrays.asList(securityContext())) // 추가
                 .securitySchemes(Arrays.asList(apiKey())) // 추가
                 .useDefaultResponseMessages(false) // Swagger 에서 제공해주는 기본 응답 코드를 표시할 것이면 true

@@ -22,4 +22,7 @@ public class Category {
     @JsonIgnore
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RegionCategory> regionCategoryList = new ArrayList<>();
+    @JsonIgnore
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Store> storeList = new ArrayList<>();
 }

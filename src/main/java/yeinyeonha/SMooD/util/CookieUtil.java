@@ -17,13 +17,6 @@ public class CookieUtil {
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
-                log.info(cookie.getName(),"  " ,cookie.getValue());
-            }
-        } else {
-            System.out.println("쿠키가 비어있음?!");
-        }
-        if (cookies != null && cookies.length > 0) {
-            for (Cookie cookie : cookies) {
                 if (name.equals(cookie.getName())) {
                     return Optional.of(cookie);
                 }

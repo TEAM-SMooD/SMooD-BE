@@ -21,7 +21,7 @@ spring:
             clientName: Naver
           kakao:
             clientId: ${client-id}
-            clientSecret: ${secret-key s}
+            clientSecret: ${secret-key}
             clientAuthenticationMethod: post
             authorizationGrantType: authorization_code
             redirectUri: ${kakaourl}
@@ -41,18 +41,18 @@ spring:
             userInfoUri: https://kapi.kakao.com/v2/user/me
             userNameAttribute: id
 
-jwt:
-  secret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOdssdfhukfhuehfefjewifesl494823jsnf3r3irlews'
+jwt.secret: ${secret}
+
 app:
   auth:
-    tokenSecret: '8sknjlO3NPTBqo319DHLNqsQAfRJEdKsETOdssdfhukfhuehfefjewifesl494823jsnf3r3irlews'
-    tokenExpiry: 300000
+    tokenSecret: ${secret}
+    tokenExpiry: 604800000
     refreshTokenExpiry: 604800000
   oauth2:
     authorizedRedirectUris:
       - ${redirect-url}
 cors:
-  allowed-origins: 'http://localhost:3000'
+  allowed-origins: "http://localhost:3000"
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
   allowed-headers: '*'
   max-age: 3600

@@ -38,8 +38,11 @@ public class SwaggerConfig {
                         typeResolver.resolve(CommentResponseDto.class),
                         typeResolver.resolve(TableauResponseDto.class),
                         typeResolver.resolve(StoreAnalysisDto.class),
+                        typeResolver.resolve(RepresentativeDto.class),
+                        typeResolver.resolve(StoreInformationDto.class),
                         typeResolver.resolve(StoreDetailDto.class),
-                        typeResolver.resolve(KeywordTopRegionDto.class))
+                        typeResolver.resolve(KeywordTopRegionDto.class),
+                        typeResolver.resolve(StoreKeywordInformationDto.class))
                 .securityContexts(Arrays.asList(securityContext())) // 추가
                 .securitySchemes(Arrays.asList(apiKey())) // 추가
                 .useDefaultResponseMessages(false) // Swagger 에서 제공해주는 기본 응답 코드를 표시할 것이면 true

@@ -4,11 +4,11 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import yeinyeonha.SMooD.domain.*;
-import yeinyeonha.SMooD.dto.KeywordTopRegionDto;
+import yeinyeonha.SMooD.dto.*;
 import yeinyeonha.SMooD.repository.*;
-import static yeinyeonha.SMooD.domain.QStore.store;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -18,47 +18,21 @@ public class StoreService {
     private final CategoryRepository categoryRepository;
     private final StoreRepository storeRepository;
     private final CustomStoreRepository storeRepositoryCustom;
-    //지역과 카테고리에 따른 상권분석 태블로 조회
-//    public StoreAnalysisDto findAnalysis(String dong, String middle) {
-//        Region region = regionRepository.findRegionByDong(dong);
-//        Category category = categoryRepository.findCategoryByMiddle(middle);
-//        Store store = storeRepository.findByRegionAndCategory(region, category);
-//        return new StoreAnalysisDto(store);
-//    }
-    //키워드에 따른 대표 가게 정보 조회
-//    public List<RepresentativeDto> findStoreByKeyword(String dong, String middle, String word) {
-//        Region region = regionRepository.findRegionByDong(dong);
-//        Category category = categoryRepository.findCategoryByMiddle(middle);
-//        Sort sorting = Sort.by("count").descending();
-//        Page<Store> result = storeRepository.findAllByRegionAndCategoryAndRep(region, category, true, sorting);
-//        return result.stream().map(RepresentativeDto::new).collect(Collectors.toList());
-//    }
-    //카테고리별 상위 가게 정보 조회
-//    public List<StoreInformationDto> findStoreByCategory(String sort, String dong, String middle) {
-//        Region region = regionRepository.findRegionByDong(dong);
-//        Category category = categoryRepository.findCategoryByMiddle(middle);
-//        if (Objects.equals(sort, "긍정 리뷰")) {
-//            Sort sorting = Sort.by("positive", "count").descending();
-//            Pageable pageable = PageRequest.of(0,15, sorting);
-//            Page<Store> result = storeRepository.findAllByRegionAndCategory(region, category, pageable);
-//            return result.stream().map(StoreInformationDto::new).collect(Collectors.toList());
-//        } else if (Objects.equals(sort, "단골")) {
-//            Sort sorting = Sort.by("revisit", "count").descending();
-//            Pageable pageable = PageRequest.of(0,15, sorting);
-//            Page<Store> result = storeRepository.findAllByRegionAndCategory(region, category, pageable);
-//            return result.stream().map(StoreInformationDto::new).collect(Collectors.toList());
-//        } else {
-//            Sort sorting = Sort.by("rising", "count").descending();
-//            Pageable pageable = PageRequest.of(0,15, sorting);
-//            Page<Store> result = storeRepository.findAllByRegionAndCategory(region, category, pageable);
-//            return result.stream().map(StoreInformationDto::new).collect(Collectors.toList());
-//        }
-//    }
+    //핵심키워드 대표 가게 정보 조회
+    public List<RepresentativeDto> findStoreByKeyword(String dong, String middle, String word) {
+        List<Store> result = storeRepositoryCustom.findRepresentation(dong, middle, word);
+        return result.stream().map(RepresentativeDto::new).collect(Collectors.toList());
+    }
+    //지역, 업종, 카테고리별 상위 가게 조회
+    public List<StoreInformationDto> findStoreByCategory(String sort, String dong, String middle) {
+        List<Store> result = storeRepositoryCustom.findStoreBySorting(sort, dong, middle);
+        return result.stream().map(StoreInformationDto::new).collect(Collectors.toList());
+    }
     //가게 상세 조회
-//    public StoreDetailDto findDetailById(Long storeId) {
-//        Store result = storeRepository.findById(storeId).get();
-//        return new StoreDetailDto(result);
-//    }
+    public StoreDetailDto findDetailById(Long storeId) {
+        Store result = storeRepository.findById(storeId).get();
+        return new StoreDetailDto(result);
+    }
     //카테고리와 키워드를 입력하면 해당 키워드가 가장 많이 포함된 지역 정보 TOP3 조회
     public List<KeywordTopRegionDto> findByKeywordAndCategory(String category, String keyword1, String keyword2, String keyword3) {
         List<Store> storeList = storeRepositoryCustom.findStoresByCategory(category, keyword1, keyword2, keyword3);
@@ -87,8 +61,32 @@ public class StoreService {
         }
         return result;
     }
-//    //특정 지역에서 업종과 키워드가 포함된 가게 정렬해서 보여주기
-//    public List<StoreInformationDto> findStoreByKeywordAndCategory() {
-//
-//    }
+    //특정 지역에서 업종과 키워드가 포함된 가게 정렬해서 보여주기
+    public List<StoreKeywordInformationDto> findStoreByKeywordAndCategory(String region, String sorting, String category, String keyword1, String keyword2, String keyword3) {
+        if(sorting.equals("긍정 리뷰")) {
+            List<Store> storeList = storeRepositoryCustom.findStoresSortingPositive(region, category, keyword1, keyword2, keyword3);
+            List<StoreKeywordInformationDto> result = new ArrayList<>();
+            for (Store s: storeList) {
+                List<String> keywords = storeRepositoryCustom.findTop3Keyword(s.getId());
+                result.add(new StoreKeywordInformationDto(s, keywords));
+            }
+            return result;
+        } else if (sorting.equals("단골")) {
+            List<Store> storeList = storeRepositoryCustom.findStoresSortingRevisit(region, category, keyword1, keyword2, keyword3);
+            List<StoreKeywordInformationDto> result = new ArrayList<>();
+            for (Store s: storeList) {
+                List<String> keywords = storeRepositoryCustom.findTop3Keyword(s.getId());
+                result.add(new StoreKeywordInformationDto(s, keywords));
+            }
+            return result;
+        } else {
+            List<Store> storeList = storeRepositoryCustom.findStoresSortingRising(region, category, keyword1, keyword2, keyword3);
+            List<StoreKeywordInformationDto> result = new ArrayList<>();
+            for (Store s: storeList) {
+                List<String> keywords = storeRepositoryCustom.findTop3Keyword(s.getId());
+                result.add(new StoreKeywordInformationDto(s, keywords));
+            }
+            return result;
+        }
+    }
 }

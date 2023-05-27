@@ -11,14 +11,13 @@ public class StoreDetailDto {
     private final List<String> url;
     private final List<KeywordReviewDto> list;
     private final List<String> topKeyword;
-    private final Double positive;
     private final Double location_x;
     private final Double location_y;
 
     public StoreDetailDto(Store store) {
         List<String> list1 = new ArrayList<>();
-        list1.add(store.getUrl7());
-        list1.add(store.getUrl8());
+        list1.add(store.getUrl1());
+        list1.add(store.getUrl2());
         List<KeywordReviewDto> list2 = new ArrayList<>();
         list2.add(new KeywordReviewDto(store.getStoreKeywordList().get(0)));
         list2.add(new KeywordReviewDto(store.getStoreKeywordList().get(1)));
@@ -32,7 +31,6 @@ public class StoreDetailDto {
         this.url = list1;
         this.list = list2;
         this.topKeyword = list3;
-        this.positive = store.getPositive();
         this.location_x = store.getLocation_x();
         this.location_y = store.getLocation_y();
     }

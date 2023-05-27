@@ -6,5 +6,5 @@ import yeinyeonha.SMooD.domain.Region;
 import yeinyeonha.SMooD.domain.RegionCategory;
 
 public interface RegionCategoryRepository extends JpaRepository<RegionCategory, Long> {
-    RegionCategory findRegionCategoryByRegionAndCategory(Region region, Category category);
+    RegionCategory findByRegionAndCategory(Region region, Category category);
 }

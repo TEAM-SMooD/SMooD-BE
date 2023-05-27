@@ -10,8 +10,5 @@ import java.util.List;
 
 @Primary
 public interface StoreRepository extends JpaRepository<Store, Long>, CustomStoreRepository {
-//    Page<Store> findAllByRegionAndCategory(Region region, Category category, Pageable pageable);
-//    Page<Store> findAllByRegionAndCategoryAndRep(Region region, Category category, Boolean rep, Sort sort);
-//    Store findByRegionAndCategory(Region region, Category category);
     List<Store> findStoresByRegionAndCategory(Region region, Category category);
 }

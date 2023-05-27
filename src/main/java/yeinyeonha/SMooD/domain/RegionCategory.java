@@ -16,10 +16,16 @@ public class RegionCategory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "region_category_Id")
     private Long id;
-    private String url1;
-    private String url2;
-    private String url3;
-    private String url4;
+    private String url1;//인구보고서
+    private String url2;//주변시설 현황보고서
+    private String url3;//매출 보고서
+    private String url4;//상권정보 보고서
+    private String url5; //핵심키워드 워드클라우드
+    private String url6; //워드클라우드 옆 순위
+    private String url7; //핵심키워드 변화
+    private String url8; //긍정 리뷰 그래프
+    private String url9; //단골 그래프
+    private String url10; //뜨고 있는 그래프
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="regionId")
     private Region region;

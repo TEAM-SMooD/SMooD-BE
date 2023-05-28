@@ -23,10 +23,11 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
         return jpaQueryFactory.selectFrom(store)
                 .leftJoin(store.storeKeywordList, storeKeyword).fetchJoin()
                 .leftJoin(storeKeyword.keyword).fetchJoin()
-                .where(store.region.dong.eq(dong), store.category.middle.eq(category), storeKeyword.keyword.name.eq(word),
-                        store.rep.eq(true))
+                .where(store.region.dong.eq(dong), store.category.middle.eq(category),
+                        storeKeyword.keyword.name.eq(word))
                 .distinct()
-                .orderBy(store.reviewCount.desc())
+                .orderBy(storeKeyword.count.desc(),
+                        store.reviewCount.desc())
                 .limit(20)
                 .fetch();
     }
@@ -37,7 +38,9 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(store.storeKeywordList, storeKeyword).fetchJoin()
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
-                    .orderBy(store.reviewCount.desc(), store.positive.desc())
+                    .orderBy(storeKeyword.count.desc(),
+                            store.reviewCount.desc(),
+                            store.positive.desc())
                     .limit(20)
                     .fetch();
         } else if (sort.equals("단골")) {
@@ -45,7 +48,9 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(store.storeKeywordList, storeKeyword).fetchJoin()
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
-                    .orderBy(store.reviewCount.desc(), store.revisit.desc())
+                    .orderBy(storeKeyword.count.desc(),
+                            store.reviewCount.desc(),
+                            store.revisit.desc())
                     .limit(20)
                     .fetch();
         } else {
@@ -53,7 +58,9 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(store.storeKeywordList, storeKeyword).fetchJoin()
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
-                    .orderBy(store.reviewCount.desc(), store.rising.desc())
+                    .orderBy(storeKeyword.count.desc(),
+                            store.reviewCount.desc(),
+                            store.rising.desc())
                     .limit(20)
                     .fetch();
         }
@@ -99,7 +106,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.eq(keyword1))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.positive.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             } else {
                 return jpaQueryFactory.selectFrom(store)
@@ -110,7 +117,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 store.region.dong.eq(region))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.positive.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             }
 
@@ -123,7 +130,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.in(keyword1, keyword2))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.positive.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             } else {
                 return jpaQueryFactory.selectFrom(store)
@@ -134,7 +141,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 store.region.dong.eq(region))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.positive.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             }
         }
@@ -146,7 +153,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3))
                     .distinct()
                     .orderBy(store.reviewCount.desc(), store.positive.desc())
-                    .limit(15)
+                    .limit(20)
                     .fetch();
         } else {
             return jpaQueryFactory.selectFrom(store)
@@ -157,7 +164,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             store.region.dong.eq(region))
                     .distinct()
                     .orderBy(store.reviewCount.desc(), store.positive.desc())
-                    .limit(15)
+                    .limit(20)
                     .fetch();
         }
     }
@@ -172,7 +179,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.eq(keyword1))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.revisit.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             } else {
                 return jpaQueryFactory.selectFrom(store)
@@ -183,7 +190,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 store.region.dong.eq(region))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.revisit.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             }
 
@@ -196,7 +203,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.in(keyword1, keyword2))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.revisit.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             } else {
                 return jpaQueryFactory.selectFrom(store)
@@ -207,7 +214,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 store.region.dong.eq(region))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.revisit.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             }
         }
@@ -219,7 +226,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3))
                     .distinct()
                     .orderBy(store.reviewCount.desc(), store.revisit.desc())
-                    .limit(15)
+                    .limit(20)
                     .fetch();
         } else {
             return jpaQueryFactory.selectFrom(store)
@@ -230,7 +237,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             store.region.dong.eq(region))
                     .distinct()
                     .orderBy(store.reviewCount.desc(), store.revisit.desc())
-                    .limit(15)
+                    .limit(20)
                     .fetch();
         }
     }
@@ -245,7 +252,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.eq(keyword1))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.rising.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             } else {
                 return jpaQueryFactory.selectFrom(store)
@@ -256,7 +263,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 store.region.dong.eq(region))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.rising.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             }
 
@@ -269,7 +276,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.in(keyword1, keyword2))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.rising.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             } else {
                 return jpaQueryFactory.selectFrom(store)
@@ -280,7 +287,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 store.region.dong.eq(region))
                         .distinct()
                         .orderBy(store.reviewCount.desc(), store.rising.desc())
-                        .limit(15)
+                        .limit(20)
                         .fetch();
             }
         }
@@ -292,7 +299,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3))
                     .distinct()
                     .orderBy(store.reviewCount.desc(), store.rising.desc())
-                    .limit(15)
+                    .limit(20)
                     .fetch();
         } else {
             return jpaQueryFactory.selectFrom(store)
@@ -303,7 +310,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             store.region.dong.eq(region))
                     .distinct()
                     .orderBy(store.reviewCount.desc(), store.rising.desc())
-                    .limit(15)
+                    .limit(20)
                     .fetch();
         }
     }

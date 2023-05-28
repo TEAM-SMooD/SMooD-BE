@@ -14,15 +14,11 @@ public class RepresentativeDto {
     private final String repKeyword;
     private final List<String> keywords;
 
-    public RepresentativeDto(Store store) {
-        List<String> list = new ArrayList<>();
-        list.add(store.getStoreKeywordList().get(0).getKeyword().getName());
-        list.add(store.getStoreKeywordList().get(1).getKeyword().getName());
-        list.add(store.getStoreKeywordList().get(2).getKeyword().getName());
+    public RepresentativeDto(Store store, List<String> keywords) {
         this.storeId = store.getId();
         this.name = store.getName();
         this.photo = store.getPhoto();
         this.repKeyword = store.getStoreKeywordList().get(0).getKeyword().getName();
-        this.keywords = list;
+        this.keywords = keywords;
     }
 }

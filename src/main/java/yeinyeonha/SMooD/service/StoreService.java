@@ -20,8 +20,13 @@ public class StoreService {
     private final CustomStoreRepository storeRepositoryCustom;
     //핵심키워드 대표 가게 정보 조회
     public List<RepresentativeDto> findStoreByKeyword(String dong, String middle, String word) {
-        List<Store> result = storeRepositoryCustom.findRepresentation(dong, middle, word);
-        return result.stream().map(RepresentativeDto::new).collect(Collectors.toList());
+        List<Store> RepresentativeDto = storeRepositoryCustom.findRepresentation(dong, middle, word);
+        List<RepresentativeDto> result = new ArrayList<>();
+        for (Store s: RepresentativeDto) {
+            List<String> keywords = storeRepositoryCustom.findTop3Keyword(s.getId());
+            result.add(new RepresentativeDto(s, keywords));
+        }
+        return result;
     }
     //지역, 업종, 카테고리별 상위 가게 조회
     public List<StoreInformationDto> findStoreByCategory(String sort, String dong, String middle) {

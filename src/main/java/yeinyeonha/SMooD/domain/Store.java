@@ -27,7 +27,6 @@ public class Store {
     private Double positive; //긍정 리뷰
     private Double revisit; //단골
     private Double rising; //뜨고 있는
-    private Boolean rep; // 대표 가게 기준
     private Long reviewCount; //리뷰 개수
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="regionId")

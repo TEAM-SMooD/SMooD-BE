@@ -52,7 +52,7 @@ public class StoreService {
     public List<KeywordTopRegionDto> findByKeywordAndCategory(String category, String keyword1, String keyword2, String keyword3) {
         List<Store> storeList = storeRepositoryCustom.findStoresByCategory(category, keyword1, keyword2, keyword3);
         int[] countList = {0, 0, 0, 0, 0, 0, 0, 0};
-        List<String> name = new ArrayList<>(Arrays.asList("", "성수1가 제1동", "성수1가 제2동", "성수2가 제1동", "성수2가 제3동", "가회동", "삼청동", "신촌동"));
+        List<String> name = new ArrayList<>(Arrays.asList("", "가회동", "삼청동", "성수1가 제1동", "성수1가 제2동", "성수2가 제1동", "성수2가 제3동", "신촌동"));
         HashMap<String, Double> percentage = new HashMap<>();
         int[] storeSum = {0, 0, 0, 0, 0, 0, 0, 0};
         for(Store s : storeList) {

@@ -14,6 +14,7 @@ public class StoreKeyword {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "store_keyword_id")
     private Long id;
+    @Column(columnDefinition = "TEXT", length = 65535)
     private String review;
     private Long count;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -21,6 +21,7 @@ import yeinyeonha.SMooD.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Optional;
 
 import static yeinyeonha.SMooD.exception.ErrorCode.*;
 
@@ -66,7 +67,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private User createUser(OAuth2UserInfo userInfo, ProviderType providerType) {
-        if (Objects.equals(userRepository.findByUserId(userInfo.getId()).getEmail(), userInfo.getEmail())) {
+        Optional<User> findUser = Optional.ofNullable(userRepository.findByUserId(userInfo.getId()));
+        if (findUser.isPresent()) {
             throw new CustomException(USER_CONFLICT);
         }
         LocalDateTime now = LocalDateTime.now();

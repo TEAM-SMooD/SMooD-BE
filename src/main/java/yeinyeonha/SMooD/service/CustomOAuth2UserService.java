@@ -10,6 +10,8 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import yeinyeonha.SMooD.domain.RoleType;
 import yeinyeonha.SMooD.domain.User;
+import yeinyeonha.SMooD.exception.CustomException;
+import yeinyeonha.SMooD.exception.ErrorCode;
 import yeinyeonha.SMooD.oauth.OAuth2UserInfoFactory;
 import yeinyeonha.SMooD.oauth.ProviderType;
 import yeinyeonha.SMooD.oauth.UserPrincipal;
@@ -18,6 +20,9 @@ import yeinyeonha.SMooD.oauth.info.OAuth2UserInfo;
 import yeinyeonha.SMooD.repository.UserRepository;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
+
+import static yeinyeonha.SMooD.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -61,6 +66,9 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private User createUser(OAuth2UserInfo userInfo, ProviderType providerType) {
+        if (Objects.equals(userRepository.findByUserId(userInfo.getId()).getEmail(), userInfo.getEmail())) {
+            throw new CustomException(USER_CONFLICT);
+        }
         LocalDateTime now = LocalDateTime.now();
         User user = new User(
                 userInfo.getId(),

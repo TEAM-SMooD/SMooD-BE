@@ -5,10 +5,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import yeinyeonha.SMooD.domain.*;
 import yeinyeonha.SMooD.dto.*;
+import yeinyeonha.SMooD.exception.CustomException;
 import yeinyeonha.SMooD.repository.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static yeinyeonha.SMooD.exception.ErrorCode.*;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +24,9 @@ public class StoreService {
     //핵심키워드 대표 가게 정보 조회
     public List<RepresentativeDto> findStoreByKeyword(String dong, String middle, String word) {
         List<Store> RepresentativeDto = storeRepositoryCustom.findRepresentation(dong, middle, word);
+        if (RepresentativeDto.size() == 0) {
+            throw new CustomException(KEYWORD_NOT_FOUND);
+        }
         List<RepresentativeDto> result = new ArrayList<>();
         for (Store s: RepresentativeDto) {
             List<String> keywords = storeRepositoryCustom.findTop3Keyword(s.getId());
@@ -35,6 +41,10 @@ public class StoreService {
     }
     //가게 상세 조회
     public StoreDetailDto findDetailById(Long storeId) {
+        Optional<Store> findStore = storeRepository.findById(storeId);
+        if (findStore.isEmpty()) {
+            throw new CustomException(STORE_NOT_FOUND);
+        }
         Store result = storeRepository.findById(storeId).get();
         return new StoreDetailDto(result);
     }

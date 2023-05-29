@@ -16,6 +16,7 @@ spring:
             authorizationGrantType: authorization_code
             redirectUri: ${naverurl}
             scope:
+              - name
               - nickname
               - email
             clientName: Naver

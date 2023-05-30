@@ -105,7 +105,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                         .where(store.category.middle.eq(category),
                                 storeKeyword.keyword.name.eq(keyword1))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.positive.desc())
+                        .orderBy(store.positive.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             } else {
@@ -116,7 +116,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.eq(keyword1),
                                 store.region.dong.eq(region))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.positive.desc())
+                        .orderBy(store.positive.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             }
@@ -129,7 +129,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                         .where(store.category.middle.eq(category),
                                 storeKeyword.keyword.name.in(keyword1, keyword2))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.positive.desc())
+                        .orderBy(store.positive.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             } else {
@@ -140,7 +140,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.in(keyword1, keyword2),
                                 store.region.dong.eq(region))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.positive.desc())
+                        .orderBy(store.positive.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             }
@@ -152,7 +152,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .where(store.category.middle.eq(category),
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3))
                     .distinct()
-                    .orderBy(store.reviewCount.desc(), store.positive.desc())
+                    .orderBy(store.positive.desc(), store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         } else {
@@ -163,7 +163,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3),
                             store.region.dong.eq(region))
                     .distinct()
-                    .orderBy(store.reviewCount.desc(), store.positive.desc())
+                    .orderBy(store.positive.desc(), store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         }
@@ -178,7 +178,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                         .where(store.category.middle.eq(category),
                                 storeKeyword.keyword.name.eq(keyword1))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.revisit.desc())
+                        .orderBy(store.revisit.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             } else {
@@ -189,7 +189,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.eq(keyword1),
                                 store.region.dong.eq(region))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.revisit.desc())
+                        .orderBy(store.revisit.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             }
@@ -202,7 +202,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                         .where(store.category.middle.eq(category),
                                 storeKeyword.keyword.name.in(keyword1, keyword2))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.revisit.desc())
+                        .orderBy(store.revisit.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             } else {
@@ -213,7 +213,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.in(keyword1, keyword2),
                                 store.region.dong.eq(region))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.revisit.desc())
+                        .orderBy(store.revisit.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             }
@@ -225,7 +225,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .where(store.category.middle.eq(category),
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3))
                     .distinct()
-                    .orderBy(store.reviewCount.desc(), store.revisit.desc())
+                    .orderBy(store.revisit.desc(), store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         } else {
@@ -236,7 +236,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3),
                             store.region.dong.eq(region))
                     .distinct()
-                    .orderBy(store.reviewCount.desc(), store.revisit.desc())
+                    .orderBy(store.revisit.desc(), store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         }
@@ -251,7 +251,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                         .where(store.category.middle.eq(category),
                                 storeKeyword.keyword.name.eq(keyword1))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.rising.desc())
+                        .orderBy(store.rising.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             } else {
@@ -262,7 +262,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.eq(keyword1),
                                 store.region.dong.eq(region))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.rising.desc())
+                        .orderBy(store.rising.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             }
@@ -275,7 +275,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                         .where(store.category.middle.eq(category),
                                 storeKeyword.keyword.name.in(keyword1, keyword2))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.rising.desc())
+                        .orderBy(store.rising.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             } else {
@@ -286,7 +286,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                                 storeKeyword.keyword.name.in(keyword1, keyword2),
                                 store.region.dong.eq(region))
                         .distinct()
-                        .orderBy(store.reviewCount.desc(), store.rising.desc())
+                        .orderBy(store.rising.desc(), store.reviewCount.desc())
                         .limit(20)
                         .fetch();
             }
@@ -298,7 +298,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .where(store.category.middle.eq(category),
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3))
                     .distinct()
-                    .orderBy(store.reviewCount.desc(), store.rising.desc())
+                    .orderBy(store.rising.desc(), store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         } else {
@@ -309,7 +309,7 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                             storeKeyword.keyword.name.in(keyword1, keyword2, keyword3),
                             store.region.dong.eq(region))
                     .distinct()
-                    .orderBy(store.reviewCount.desc(), store.rising.desc())
+                    .orderBy(store.rising.desc(), store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         }

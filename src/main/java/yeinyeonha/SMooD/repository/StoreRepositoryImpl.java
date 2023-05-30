@@ -39,8 +39,8 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
                     .orderBy(store.positive.desc(),
-                            storeKeyword.count.desc(),
-                            store.reviewCount.desc())
+                            store.reviewCount.desc(),
+                            storeKeyword.count.desc())
                     .limit(20)
                     .fetch();
         } else if (sort.equals("단골")) {
@@ -49,8 +49,8 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
                     .orderBy(store.revisit.desc(),
-                            storeKeyword.count.desc(),
-                            store.reviewCount.desc())
+                            store.reviewCount.desc(),
+                            storeKeyword.count.desc())
                     .limit(20)
                     .fetch();
         } else {
@@ -59,8 +59,8 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
                     .orderBy(store.rising.desc(),
-                            storeKeyword.count.desc(),
-                            store.reviewCount.desc())
+                            store.reviewCount.desc(),
+                            storeKeyword.count.desc())
                     .limit(20)
                     .fetch();
         }

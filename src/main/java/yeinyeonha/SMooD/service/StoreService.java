@@ -21,6 +21,7 @@ public class StoreService {
     private final CategoryRepository categoryRepository;
     private final StoreRepository storeRepository;
     private final CustomStoreRepository storeRepositoryCustom;
+    private final CustomKeywordRepository customKeywordRepository;
     //핵심키워드 대표 가게 정보 조회
     public List<RepresentativeDto> findStoreByKeyword(String dong, String middle, String word) {
         List<Store> RepresentativeDto = storeRepositoryCustom.findRepresentation(dong, middle, word);
@@ -33,6 +34,11 @@ public class StoreService {
             result.add(new RepresentativeDto(s, keywords));
         }
         return result;
+    }
+    //핵심키워드 정보 조회
+    public List<KeywordDto> findKeyword(String dong, String middle) {
+        List<Keyword> result = customKeywordRepository.findRepresentKeyword(dong, middle);
+        return result.stream().map(KeywordDto::new).collect(Collectors.toList());
     }
     //지역, 업종, 카테고리별 상위 가게 조회
     public List<StoreInformationDto> findStoreByCategory(String sort, String dong, String middle) {

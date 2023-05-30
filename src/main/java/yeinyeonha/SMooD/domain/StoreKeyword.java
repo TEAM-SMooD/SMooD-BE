@@ -17,6 +17,7 @@ public class StoreKeyword {
     @Column(columnDefinition = "TEXT", length = 65535)
     private String review;
     private Long count;
+    private boolean rep;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="storeId")
     private Store store;

@@ -32,6 +32,19 @@ public class StoreController {
         List<RepresentativeDto> responseDto = storeService.findStoreByKeyword(dong, category, keyword);
         return ResponseDto.success("result", responseDto);
     }
+    //핵심키워드 TOP20 조회
+    @Operation(summary = "핵심 키워드 TOP20 조회", description = "스무디 리포트에 들어갈 TOP20 키워드를 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "정보 조회 성공", content = @Content(schema = @Schema(implementation = KeywordDto.class))),
+            @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
+    })
+    @GetMapping("/store/keyword")
+    public ResponseDto<?> findRepresentation(@RequestParam("dong") String dong, @RequestParam("category") String category) {
+        List<KeywordDto> responseDto = storeService.findKeyword(dong, category);
+        return ResponseDto.success("result", responseDto);
+    }
     //지역, 업종, 카테고리별 상위 가게 조회
     @Operation(summary = "정렬 기준에 따른 가게 정보 조회", description = "정렬 기준에 맞는 가게 정보들을 가져옵니다.")
     @ApiResponses(value = {

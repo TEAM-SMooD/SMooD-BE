@@ -38,9 +38,9 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(store.storeKeywordList, storeKeyword).fetchJoin()
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
-                    .orderBy(storeKeyword.count.desc(),
-                            store.reviewCount.desc(),
-                            store.positive.desc())
+                    .orderBy(store.positive.desc(),
+                            storeKeyword.count.desc(),
+                            store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         } else if (sort.equals("단골")) {
@@ -48,9 +48,9 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(store.storeKeywordList, storeKeyword).fetchJoin()
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
-                    .orderBy(storeKeyword.count.desc(),
-                            store.reviewCount.desc(),
-                            store.revisit.desc())
+                    .orderBy(store.revisit.desc(),
+                            storeKeyword.count.desc(),
+                            store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         } else {
@@ -58,9 +58,9 @@ public class StoreRepositoryImpl implements CustomStoreRepository {
                     .leftJoin(store.storeKeywordList, storeKeyword).fetchJoin()
                     .leftJoin(storeKeyword.keyword).fetchJoin()
                     .where(store.region.dong.eq(dong), store.category.middle.eq(middle))
-                    .orderBy(storeKeyword.count.desc(),
-                            store.reviewCount.desc(),
-                            store.rising.desc())
+                    .orderBy(store.rising.desc(),
+                            storeKeyword.count.desc(),
+                            store.reviewCount.desc())
                     .limit(20)
                     .fetch();
         }

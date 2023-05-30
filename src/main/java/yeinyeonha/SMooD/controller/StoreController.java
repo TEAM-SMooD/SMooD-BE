@@ -20,7 +20,7 @@ import java.util.List;
 public class StoreController {
     private final StoreService storeService;
     //핵심키워드 대표 가게 정보 조회
-    @Operation(summary = "핵심 키워드 대표 가게 정보 조회", description = "스무디 리포트에 들어갈 핵심 키워드별 대표 가게 정보를 조회합니다.")
+    @Operation(summary = "[컨셉추천] _가 포함된 대표 가게 조회 API", description = "스무디 리포트에 들어갈 핵심 키워드별 대표 가게 정보를 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "정보 조회 성공", content = @Content(schema = @Schema(implementation = RepresentativeDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
@@ -33,7 +33,7 @@ public class StoreController {
         return ResponseDto.success("result", responseDto);
     }
     //핵심키워드 TOP20 조회
-    @Operation(summary = "핵심 키워드 TOP20 조회", description = "스무디 리포트에 들어갈 TOP20 키워드를 조회합니다.")
+    @Operation(summary = "[컨셉추천] 1분기 핵심키워드 20개 조회 API", description = "스무디 리포트에 들어갈 TOP20 키워드를 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "정보 조회 성공", content = @Content(schema = @Schema(implementation = KeywordDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
@@ -46,7 +46,7 @@ public class StoreController {
         return ResponseDto.success("result", responseDto);
     }
     //지역, 업종, 카테고리별 상위 가게 조회
-    @Operation(summary = "정렬 기준에 따른 가게 정보 조회", description = "정렬 기준에 맞는 가게 정보들을 가져옵니다.")
+    @Operation(summary = "[컨셉추천] 카테고리별 키워드 분석 가게 조회 API", description = "정렬 기준에 맞는 가게 정보들을 가져옵니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "가게 정보 조회 성공", content = @Content(schema = @Schema(implementation = StoreInformationDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
@@ -59,7 +59,7 @@ public class StoreController {
         return ResponseDto.success("result", responseDtoList);
     }
     //가게 상세정보 조회
-    @Operation(summary = "가게 상세정보 조회", description = "가게 상세정보를 조회합니다.")
+    @Operation(summary = "[모든 가게 포함] 가게 상세 정보 조회 API", description = "가게 상세정보를 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "가게 상세 정보 조회 성공", content = @Content(schema = @Schema(implementation = StoreDetailDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
@@ -72,7 +72,7 @@ public class StoreController {
         return ResponseDto.success("result", responseDto);
     }
     //컨셉 추천 결과값 가져오기
-    @Operation(summary = "키워드에 따른 지역 정보 조회", description = "키워드와 업종을 입력하면 키워드가 많이 포함된 지역 3개를 조회합니다.")
+    @Operation(summary = "[지역추천] 키워드가 가장 많이 포함된 TOP3 지역 조회 API", description = "키워드와 업종을 입력하면 키워드가 많이 포함된 지역 3개를 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "정보 조회 성공", content = @Content(schema = @Schema(implementation = KeywordTopRegionDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
@@ -85,7 +85,7 @@ public class StoreController {
         return ResponseDto.success("result", responseDtoList);
     }
     //컨셉 추천 가게정보 가져오기
-    @Operation(summary = "지역과 정렬기준에 따른 키워드가 포함된 가게 정보 조회", description = "지역과 업종에 따라서 키워드가 포함된 가게들을 조회합니다.")
+    @Operation(summary = "[지역추천] 키워드가 포함된 대표 가게 조회 API", description = "지역과 업종에 따라서 키워드가 포함된 가게들을 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "정보 조회 성공", content = @Content(schema = @Schema(implementation = StoreKeywordInformationDto.class))),
             @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),

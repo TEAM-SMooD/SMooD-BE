@@ -19,7 +19,9 @@ public class Store {
     private Long id;
     private String name;
     private String photo;
+    @Column(columnDefinition = "TEXT", length = 2048)
     private String url1; //가게 상세정보 도표
+    @Column(columnDefinition = "TEXT", length = 2048)
     private String url2; //가게 상세정보 워드클라우드
     private String location; //주소
     private Double location_x; //위도

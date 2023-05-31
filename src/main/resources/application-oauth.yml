@@ -17,7 +17,6 @@ spring:
             redirectUri: ${naverurl}
             scope:
               - name
-              - nickname
               - email
             clientName: Naver
           kakao:
@@ -47,13 +46,13 @@ jwt.secret: ${secret}
 app:
   auth:
     tokenSecret: ${secret}
-    tokenExpiry: 604800000
+    tokenExpiry: 1800000
     refreshTokenExpiry: 604800000
   oauth2:
     authorizedRedirectUris:
       - ${redirect-url}
 cors:
-  allowed-origins: "http://localhost:3000"
+  allowed-origins: "https://smood.org"
   allowed-methods: GET,POST,PUT,DELETE,OPTIONS
   allowed-headers: '*'
   max-age: 3600

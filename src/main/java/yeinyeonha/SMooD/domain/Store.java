@@ -18,6 +18,7 @@ public class Store {
     @Column(name = "storeId")
     private Long id;
     private String name;
+    @Column(columnDefinition = "TEXT", length = 2048)
     private String photo;
     @Column(columnDefinition = "TEXT", length = 2048)
     private String url1; //가게 상세정보 도표

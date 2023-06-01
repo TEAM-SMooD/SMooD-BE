@@ -97,4 +97,17 @@ public class StoreController {
         List<StoreKeywordInformationDto> responseDtoList = storeService.findStoreByKeywordAndCategory(region, sorting, category, keyword1, keyword2, keyword3);
         return ResponseDto.success("result", responseDtoList);
     }
+    //모든 가게 정보 가져오기
+    @Operation(summary = "모든 가게 조회 API", description = "모든 가게 상세정보를 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "정보 조회 성공", content = @Content(schema = @Schema(implementation = StoreDto.class))),
+            @ApiResponse(responseCode = "400", description = "존재하지 않는 리소스 접근", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "401", description = "인증되지 않은 사용자", content = @Content(schema = @Schema(implementation = ResponseDto.class))),
+            @ApiResponse(responseCode = "404", description = "정보 없음", content = @Content(schema = @Schema(implementation = ResponseDto.class)))
+    })
+    @GetMapping("/store/all")
+    public ResponseDto<?> findallStore() {
+        List<StoreDto> responseDtoList = storeService.findall();
+        return ResponseDto.success("result", responseDtoList);
+    }
 }

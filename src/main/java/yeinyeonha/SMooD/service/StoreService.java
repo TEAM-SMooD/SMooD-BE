@@ -110,4 +110,9 @@ public class StoreService {
             return result;
         }
     }
+    //모든 가게 조회
+    public List<StoreDto> findall() {
+        List<Store> result = storeRepository.findAll();
+        return result.stream().map(StoreDto::new).collect(Collectors.toList());
+    }
 }

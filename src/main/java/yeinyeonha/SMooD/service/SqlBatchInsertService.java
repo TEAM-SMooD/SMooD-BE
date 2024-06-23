@@ -1,7 +1,6 @@
 package yeinyeonha.SMooD.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import java.util.regex.Pattern;
 @RequiredArgsConstructor
 @Service
 public class SqlBatchInsertService {
-    private static JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public void batchInsertFromSqlFile(String resourcePath) throws IOException {
         List<String> sqlStatements = new ArrayList<>();

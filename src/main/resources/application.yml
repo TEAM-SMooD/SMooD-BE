@@ -33,10 +33,10 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-    defer-datasource-initialization: true
-  sql:
-    init:
-      mode: always
+#    defer-datasource-initialization: true
+#  sql:
+#    init:
+#      mode: always
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher

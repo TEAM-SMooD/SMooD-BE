@@ -8,7 +8,7 @@ import yeinyeonha.SMooD.service.SqlBatchInsertService;
 @RequiredArgsConstructor
 @Component
 public class SqlBatchInsertRunner implements CommandLineRunner {
-    private static SqlBatchInsertService sqlBatchInsertService;
+    private final SqlBatchInsertService sqlBatchInsertService;
 
     @Override
     public void run(String... args) throws Exception {

@@ -76,7 +76,7 @@ jobs:
           aws deploy create-deployment \
           --application-name smood \
           --deployment-config-name CodeDeployDefault.AllAtOnce \
-          --deployment-group-name smood-prod \
+          --deployment-group-name smood \
           --file-exists-behavior OVERWRITE \
           --s3-location bucket=smood,bundleType=zip,key=smood/$GITHUB_SHA.zip \
           --region ap-northeast-2 \

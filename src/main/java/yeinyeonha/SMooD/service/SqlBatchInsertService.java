@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 @Service
 public class SqlBatchInsertService {
     private final JdbcTemplate jdbcTemplate;
+    private static final int BATCH_SIZE = 100; // 배치 사이즈 설정
 
     public void batchInsertFromSqlFile(String resourcePath) throws IOException {
         List<String> sqlStatements = new ArrayList<>();
@@ -46,12 +47,12 @@ public class SqlBatchInsertService {
                     currentColumns = columns;
                 }
 
-                if (!currentTable.equals(table)) {
-                    // Perform batch insert for the previous table
-                    String insertSql = String.format("INSERT INTO %s (%s) VALUES (%s)", currentTable, currentColumns, generatePlaceholders(currentColumns));
-                    jdbcTemplate.batchUpdate(insertSql, batchArgs);
+                if (!currentTable.equals(table) || batchArgs.size() >= BATCH_SIZE) {
+                    if (!batchArgs.isEmpty()) {
+                        String insertSql = String.format("INSERT INTO %s (%s) VALUES (%s)", currentTable, currentColumns, generatePlaceholders(currentColumns));
+                        jdbcTemplate.batchUpdate(insertSql, batchArgs);
+                    }
 
-                    // Reset for the new table
                     currentTable = table;
                     currentColumns = columns;
                     batchArgs = new ArrayList<>();
@@ -61,7 +62,6 @@ public class SqlBatchInsertService {
             }
         }
 
-        // Perform the final batch insert
         if (!batchArgs.isEmpty()) {
             String insertSql = String.format("INSERT INTO %s (%s) VALUES (%s)", currentTable, currentColumns, generatePlaceholders(currentColumns));
             jdbcTemplate.batchUpdate(insertSql, batchArgs);
